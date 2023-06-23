@@ -1,0 +1,10 @@
+{
+    "overrides": [
+        {
+            "files": ["*.vue", "*.js", "*.ts", "*.scss"]
+        }
+    ],
+    "printWidth": 200,
+    "singleQuote": true
+    
+}
