@@ -15,4 +15,10 @@ class Anime extends Model {
 
     protected $hidden = ['updated_at', 'deleted_at'];
 
+    protected $appends = ['slug'];
+
+    public function getSlugAttribute() {
+        return strtolower(str_replace(' ', '-', $this->title));
+    }
+
 }

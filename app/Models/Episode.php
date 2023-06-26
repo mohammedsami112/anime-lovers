@@ -15,4 +15,10 @@ class Episode extends Model {
 
     protected $hidden = ['updated_at'];
 
+    protected $with = ['anime'];
+
+    public function anime() {
+        return $this->hasOne(Anime::class, 'id', 'anime_id');
+    }
+
 }
