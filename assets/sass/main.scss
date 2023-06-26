@@ -1,10 +1,25 @@
+@import '_mixins.scss';
 body {
   font-family: 'Tajawal';
   padding-top: 70px;
-  height: 100000px;
 }
 
 a {
   text-decoration: none;
   color: #333;
+}
+
+.section-header {
+  .section-title {
+    background-color: $mainColor;
+    padding: 10px;
+    border-radius: 50px;
+    width: fit-content;
+    color: #fff;
+    @include sm {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
 }

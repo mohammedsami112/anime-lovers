@@ -1,48 +1,50 @@
 <template>
-  <Swiper
-    :modules="[SwiperAutoplay, SwiperFreeMode, SwiperNavigation]"
-    :slides-per-view="1"
-    :spaceBetween="30"
-    :loop="true"
-    navigation
-    :effect="'creative'"
-    :autoplay="{
-      delay: 1000,
-      disableOnInteraction: true,
-    }"
-    :creative-effect="{
-      prev: {
-        shadow: false,
-        translate: ['-20%', 0, -1],
-      },
-      next: {
-        translate: ['100%', 0, 0],
-      },
-    }"
-    :breakpoints="{
-      '640': {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-      '768': {
-        slidesPerView: 3,
-        spaceBetween: 40,
-      },
-      '1024': {
-        slidesPerView: 3,
-        spaceBetween: 50,
-      },
-    }"
-  >
-    <SwiperSlide v-for="slider in homeStore.slider" :key="slider.id">
-      <img :src="config.public.backendURL + '/storage/thumbnails/' + slider.thumbnail" alt="" />
-      <div class="content">
-        <div class="content-item">
-          <h3>{{ slider.title }}</h3>
+  <v-container>
+    <Swiper
+      :modules="[SwiperAutoplay, SwiperFreeMode, SwiperNavigation]"
+      :slides-per-view="1"
+      :spaceBetween="30"
+      :loop="true"
+      navigation
+      :effect="'creative'"
+      :autoplay="{
+        delay: 1000,
+        disableOnInteraction: true,
+      }"
+      :creative-effect="{
+        prev: {
+          shadow: false,
+          translate: ['-20%', 0, -1],
+        },
+        next: {
+          translate: ['100%', 0, 0],
+        },
+      }"
+      :breakpoints="{
+        '640': {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        '768': {
+          slidesPerView: 3,
+          spaceBetween: 40,
+        },
+        '1024': {
+          slidesPerView: 3,
+          spaceBetween: 50,
+        },
+      }"
+    >
+      <SwiperSlide v-for="slider in homeStore.slider" :key="slider.id">
+        <img :src="config.public.backendURL + '/storage/thumbnails/' + slider.thumbnail" alt="" />
+        <div class="content">
+          <div class="content-item">
+            <h3>{{ slider.title }}</h3>
+          </div>
         </div>
-      </div>
-    </SwiperSlide>
-  </Swiper>
+      </SwiperSlide>
+    </Swiper>
+  </v-container>
 </template>
 
 <script setup>
@@ -51,29 +53,6 @@ import { useHomeStore } from '~/store/home';
 
 const config = useRuntimeConfig();
 const homeStore = useHomeStore();
-
-const items = ref([
-  {
-    title: 'Test',
-    image: 'test.jpg',
-  },
-  {
-    title: 'Test',
-    image: 'test.jpg',
-  },
-  {
-    title: 'Test',
-    image: 'test.jpg',
-  },
-  {
-    title: 'Test',
-    image: 'test.jpg',
-  },
-  {
-    title: 'Test',
-    image: 'test.jpg',
-  },
-]);
 </script>
 <style lang="scss">
 .swiper-slide {
