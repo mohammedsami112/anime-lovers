@@ -13,12 +13,22 @@ class Anime extends Model {
 
     protected $guarded = [];
 
-    protected $hidden = ['updated_at', 'deleted_at'];
+    protected $hidden = ['updated_at', 'deleted_at', 'type', 'status'];
 
     protected $appends = ['slug'];
 
+    protected $with = ['anime_type', 'anime_status'];
+
     public function getSlugAttribute() {
         return strtolower(str_replace(' ', '-', $this->title));
+    }
+
+    public function anime_type() {
+        return $this->hasOne(Type::class, 'id', 'type');
+    }
+
+    public function anime_status() {
+        return $this->hasOne(Status::class, 'id', 'status');
     }
 
 }

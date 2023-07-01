@@ -13,4 +13,7 @@ class Status extends Model
     protected $table = 'anime_status';
 
     protected $fillable = ['title'];
+
+    protected $hidden = ['updated_at', 'deleted_at', 'created_at'];
+
 }

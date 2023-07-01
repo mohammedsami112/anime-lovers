@@ -28,6 +28,7 @@ Route::group(['prefix' => 'scrapers', 'controller' => scrapersController::class]
 // Categories
 Route::group(['prefix' => 'categories', 'controller' => categoriesController::class], function() {
     Route::get('/', 'getAllCategories');
+    Route::get('/{categoryId}', 'getOneCategory');
 });
 
 // Global

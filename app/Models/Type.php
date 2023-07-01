@@ -14,4 +14,7 @@ class Type extends Model
 
     protected $fillable = ['title'];
 
+    protected $hidden = ['updated_at', 'deleted_at', 'created_at'];
+
+
 }
