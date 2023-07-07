@@ -4,7 +4,7 @@
       <div class="section-header mb-4 d-flex justify-space-between align-center flex-sm-row flex-column">
         <h4 class="section-title w-sm-100">آخر الحلقات المضافة</h4>
         <NuxtLink to="/anime">
-          <v-btn variant="outlined" color="primary"> المزيد من الحلقات </v-btn>
+          <v-btn variant="tonal" color="primary"> المزيد من الحلقات </v-btn>
         </NuxtLink>
       </div>
       <v-row>

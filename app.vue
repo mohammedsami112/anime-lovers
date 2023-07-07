@@ -3,6 +3,7 @@
   <NuxtLayout>
     <NuxtPage></NuxtPage>
   </NuxtLayout>
+  
   <TheFooter></TheFooter>
 </template>
 
