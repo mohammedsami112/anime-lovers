@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\animeController;
 use App\Http\Controllers\categoriesController;
 use App\Http\Controllers\globalController;
 use App\Http\Controllers\scrapersController;
@@ -31,10 +32,12 @@ Route::group(['prefix' => 'categories', 'controller' => categoriesController::cl
     Route::get('/{categoryId}', 'getOneCategory');
 });
 
+// Anime
+Route::group(['prefix' => 'anime', 'controller' => animeController::class], function() {
+    Route::get('/{animeId}', 'getOneAnime');
+});
+
 // Global
-
 Route::group(['controller' => globalController::class], function() {
-
     Route::get('/home', 'getHome');
-
 });

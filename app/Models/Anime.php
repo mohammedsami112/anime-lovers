@@ -17,7 +17,7 @@ class Anime extends Model {
 
     protected $appends = ['slug'];
 
-    protected $with = ['anime_type', 'anime_status'];
+    protected $with = ['anime_type', 'anime_status', 'anime_categories'];
 
     public function getSlugAttribute() {
         return strtolower(str_replace(' ', '-', $this->title));
@@ -29,6 +29,10 @@ class Anime extends Model {
 
     public function anime_status() {
         return $this->hasOne(Status::class, 'id', 'status');
+    }
+
+    public function anime_categories() {
+        return $this->hasMany(SelectedCategory::class, 'anime_id', 'id');
     }
 
 }
