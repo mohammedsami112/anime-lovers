@@ -17,6 +17,11 @@ class Episode extends Model {
 
     protected $with = ['anime'];
 
+    protected $appends = ['slug'];
+
+    public function getSlugAttribute() {
+        return strtolower(str_replace(' ', '-', $this->title));
+    }
     public function anime() {
         return $this->hasOne(Anime::class, 'id', 'anime_id');
     }
