@@ -3,11 +3,11 @@
     <div class="servers">
       <h5>اختر سيرفر المشاهدة</h5>
       <ul>
-        <li v-for="(server, index) in servers" :key="index" :class="{ active: server == selectedServer }" @click="handelSelectedServer(server)">{{ server.title }}</li>
+        <li v-for="(server, index) in servers" :key="index" :class="{ active: server.embed_url == selectedServer.embed_url }" @click="handelSelectedServer(server)">{{ server.title }}</li>
       </ul>
     </div>
     <div class="player">
-      <iframe :src="selectedServer.embed_url" allowfullscreen frameborder="0"></iframe>
+      <iframe src="//yonaplay.org/embed.php?id=7366" allowfullscreen frameborder="0"></iframe>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ handelSelectedServer(servers[0]);
   width: 250px;
   margin-left: 10px;
   overflow: hidden;
-  height: 300px;
+  height: 400px;
   h5 {
     background-color: #5151512e;
     padding: 10px;
@@ -53,6 +53,15 @@ handelSelectedServer(servers[0]);
         background-color: #d8d8d8;
       }
     }
+  }
+}
+
+.player {
+  width: 700px;
+  height: 400px;
+  iframe {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
