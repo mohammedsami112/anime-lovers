@@ -5,6 +5,7 @@ export const useAnimeStore = defineStore('anime', {
     current: {
       data: {},
       episodes: {},
+      episode: {},
     },
   }),
 
@@ -14,6 +15,10 @@ export const useAnimeStore = defineStore('anime', {
 
       this.current.data = animeData.value.data.anime;
       this.current.episodes = animeData.value.data.episodes;
+    },
+    async getOneEpisode(episodeId) {
+      const { data: episodeData } = await useMyFetch(`/episodes/${episodeId}`);
+      this.current.episode = episodeData.value.data;
     },
   },
 });
