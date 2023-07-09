@@ -2,6 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
+    "start": ".output/server/index.mjs",
     "build": "nuxt build",
     "dev": "nuxt dev --hostname '0' --port 8000",
     "generate": "nuxt generate",
