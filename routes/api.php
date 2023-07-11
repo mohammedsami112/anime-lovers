@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\animeController;
 use App\Http\Controllers\categoriesController;
+use App\Http\Controllers\episodesController;
 use App\Http\Controllers\globalController;
 use App\Http\Controllers\scrapersController;
 use Illuminate\Http\Request;
@@ -35,6 +36,13 @@ Route::group(['prefix' => 'categories', 'controller' => categoriesController::cl
 // Anime
 Route::group(['prefix' => 'anime', 'controller' => animeController::class], function() {
     Route::get('/{animeId}', 'getOneAnime');
+});
+
+// Episodes
+Route::group(['prefix' => 'episodes', 'controller' => episodesController::class], function() {
+
+    Route::get('/{episodeId}', 'getOneEpisode');
+
 });
 
 // Global
