@@ -7,7 +7,7 @@
       </ul>
     </div>
     <div class="player">
-      <iframe src="//yonaplay.org/embed.php?id=7366" allowfullscreen frameborder="0"></iframe>
+      <iframe :src="selectedServer.embed_url" allowfullscreen frameborder="0"></iframe>
     </div>
   </div>
 </template>
