@@ -6,9 +6,22 @@ use App\Models\Anime;
 use App\Models\Episode;
 use Illuminate\Http\Request;
 
-class animeController extends Controller {
+class animeController extends Controller
+{
 
-    public function getOneAnime($animeId) {
+    public function getAnime(Request $request)
+    {
+        $searchQuery = $request->query('search');
+        $anime = Anime::when($searchQuery, function ($query, $search) {
+            return $query->where('title', 'LIKE', "%$search%");
+        })->paginate(10);
+
+
+        return $this->successResponse($anime);
+    }
+
+    public function getOneAnime($animeId)
+    {
         $anime = Anime::find($animeId);
 
         if ($anime == null) {
@@ -23,7 +36,5 @@ class animeController extends Controller {
         ];
 
         return $this->successResponse($data);
-
     }
-
 }

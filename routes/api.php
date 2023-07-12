@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Scrapers
-Route::group(['prefix' => 'scrapers', 'controller' => scrapersController::class], function() {
+Route::group(['prefix' => 'scrapers', 'controller' => scrapersController::class], function () {
     Route::get('categories', 'categories');
     Route::get('statuses', 'statuses');
     Route::get('types', 'types');
@@ -28,24 +28,24 @@ Route::group(['prefix' => 'scrapers', 'controller' => scrapersController::class]
 });
 
 // Categories
-Route::group(['prefix' => 'categories', 'controller' => categoriesController::class], function() {
+Route::group(['prefix' => 'categories', 'controller' => categoriesController::class], function () {
     Route::get('/', 'getAllCategories');
     Route::get('/{categoryId}', 'getOneCategory');
 });
 
 // Anime
-Route::group(['prefix' => 'anime', 'controller' => animeController::class], function() {
+Route::group(['prefix' => 'anime', 'controller' => animeController::class], function () {
+    Route::get('/', 'getAnime');
     Route::get('/{animeId}', 'getOneAnime');
 });
 
 // Episodes
-Route::group(['prefix' => 'episodes', 'controller' => episodesController::class], function() {
+Route::group(['prefix' => 'episodes', 'controller' => episodesController::class], function () {
 
     Route::get('/{episodeId}', 'getOneEpisode');
-
 });
 
 // Global
-Route::group(['controller' => globalController::class], function() {
+Route::group(['controller' => globalController::class], function () {
     Route::get('/home', 'getHome');
 });
