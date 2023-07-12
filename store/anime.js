@@ -7,9 +7,15 @@ export const useAnimeStore = defineStore('anime', {
       episodes: {},
       episode: {},
     },
+    search: {},
   }),
 
   actions: {
+    async searchAnime(query, page = 1) {
+      const { data: searchData } = await useMyFetch('/anime', { params: { search: query, page: page } });
+
+      this.search = searchData.value.data;
+    },
     async getOneAnime(animeId, page = 1) {
       const { data: animeData } = await useMyFetch(`/anime/${animeId}`, { params: { page: page } });
 

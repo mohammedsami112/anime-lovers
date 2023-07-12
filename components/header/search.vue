@@ -5,9 +5,9 @@
       <div class="box" v-if="searchBoxStatus">
         <v-container class="d-flex align-center justify-center w-100 h-100">
           <div class="close-box" @click="searchBoxStatus = false"><font-awesome-icon icon="fa-solid fa-times"></font-awesome-icon></div>
-          <div class="search">
+          <form @submit.prevent="handelSearchAction()" class="search">
             <v-text-field v-model="searchQuery" variant="underlined" label="البحث في الموقع" type="text"></v-text-field>
-          </div>
+          </form>
         </v-container>
       </div>
     </v-expand-transition>
@@ -16,9 +16,20 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useAnimeStore } from '~/store/anime';
 
+const router = useRouter();
+const animeStore = useAnimeStore();
 const searchBoxStatus = ref(false);
 const searchQuery = ref(null);
+
+const handelSearchAction = () => {
+  if (router.currentRoute.value.name == 'search') {
+    animeStore.searchAnime(searchQuery.value);
+  }
+  router.push({ path: 'search', query: { query: searchQuery.value } });
+  searchBoxStatus.value = false;
+};
 </script>
 
 <style lang="scss" scoped>
