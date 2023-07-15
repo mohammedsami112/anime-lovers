@@ -42,6 +42,7 @@ Route::group(['prefix' => 'anime', 'controller' => animeController::class], func
 // Episodes
 Route::group(['prefix' => 'episodes', 'controller' => episodesController::class], function () {
 
+    Route::get('/', 'getEpisodes');
     Route::get('/{episodeId}', 'getOneEpisode');
 });
 

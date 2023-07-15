@@ -12,9 +12,17 @@ class animeController extends Controller
     public function getAnime(Request $request)
     {
         $searchQuery = $request->query('search');
+        $type =  $request->query('type');
+        $status =  $request->query('status');
+
         $anime = Anime::when($searchQuery, function ($query, $search) {
             return $query->where('title', 'LIKE', "%$search%");
+        })->when($type, function ($query, $type) {
+            return $query->where('type', 'LIKE', "%$type%");
+        })->when($status, function ($query, $status) {
+            return $query->where('status', 'LIKE', "%$status%");
         })->paginate(10);
+
 
 
         return $this->successResponse($anime);
