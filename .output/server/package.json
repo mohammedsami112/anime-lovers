@@ -29,6 +29,7 @@
     "hookable": "5.5.3",
     "iron-webcrypto": "0.7.0",
     "klona": "2.0.6",
+    "mitt": "3.0.1",
     "moment": "2.29.4",
     "node-fetch-native": "1.2.0",
     "ofetch": "1.1.0",

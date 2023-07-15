@@ -1,4 +1,4 @@
-import { version as version$1, hasInjectionContext, inject as inject$1, createVNode, mergeProps, Transition, toRefs, shallowRef, ref, computed, watch, nextTick, toRef, watchEffect, provide, onScopeDispose, withDirectives, resolveDirective, vShow, Fragment, reactive, capitalize, h, onUpdated, getCurrentInstance as getCurrentInstance$1, unref, defineComponent as defineComponent$1, resolveComponent, camelize, toRaw, readonly, TransitionGroup, isRef, Text, resolveDynamicComponent, effectScope, warn, Teleport, cloneVNode, createTextVNode, vModelText, useSSRContext, createApp, isReactive, onServerPrefetch, withCtx, openBlock, createBlock, createCommentVNode, renderList, getCurrentScope, onErrorCaptured, markRaw, isReadonly, defineAsyncComponent, isShallow, Suspense } from 'vue';
+import { version as version$1, hasInjectionContext, inject as inject$1, createVNode, mergeProps, Transition, toRefs, shallowRef, ref, computed, watch, nextTick, toRef, watchEffect, provide, onScopeDispose, withDirectives, resolveDirective, vShow, Fragment, reactive, capitalize, h, onUpdated, getCurrentInstance as getCurrentInstance$1, unref, defineComponent as defineComponent$1, resolveComponent, camelize, toRaw, readonly, TransitionGroup, isRef, Text, resolveDynamicComponent, effectScope, warn, Teleport, cloneVNode, createTextVNode, vModelText, useSSRContext, createApp, isReactive, onServerPrefetch, withCtx, openBlock, createBlock, createCommentVNode, renderList, withModifiers, getCurrentScope, onErrorCaptured, markRaw, isReadonly, defineAsyncComponent, isShallow, Suspense } from 'vue';
 import { $fetch } from 'ofetch';
 import { createHooks } from 'hookable';
 import { getContext, executeAsync } from 'unctx';
@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
 import { hash } from 'ohash';
+import mitt from 'mitt';
 import { defu } from 'defu';
 import { a as useRuntimeConfig$1 } from '../nitro/node-server.mjs';
 import 'node-fetch-native/polyfill';
@@ -1200,7 +1201,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/_id_-_slug_-876111f3.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/_id_-_slug_-d1beecfc.mjs').then((m) => m.default || m)
   },
   {
     name: "anime-id-slug",
@@ -1208,7 +1209,15 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-a70bc5f2.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-3700f5a9.mjs').then((m) => m.default || m)
+  },
+  {
+    name: "anime",
+    path: "/anime",
+    meta: {},
+    alias: [],
+    redirect: void 0,
+    component: () => import('./_nuxt/index-92737d8e.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "category-id-title",
@@ -1216,7 +1225,15 @@ const _routes = [
     meta: __nuxt_page_meta || {},
     alias: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.alias) || [],
     redirect: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.redirect) || void 0,
-    component: () => import('./_nuxt/_id_-_title_-1b7dba3c.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/_id_-_title_-a7042a46.mjs').then((m) => m.default || m)
+  },
+  {
+    name: "episodes",
+    path: "/episodes",
+    meta: {},
+    alias: [],
+    redirect: void 0,
+    component: () => import('./_nuxt/index-3b3331f2.mjs').then((m) => m.default || m)
   },
   {
     name: "index",
@@ -1224,7 +1241,15 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-1f29a668.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-bfeeaf92.mjs').then((m) => m.default || m)
+  },
+  {
+    name: "search",
+    path: "/search",
+    meta: {},
+    alias: [],
+    redirect: void 0,
+    component: () => import('./_nuxt/index-4390622f.mjs').then((m) => m.default || m)
   }
 ];
 const routerOptions0 = {
@@ -20614,10 +20639,38 @@ const _plugins = [
   fontawesome_cn2c4tOOHz,
   vuetify_7h9QAQEssH
 ];
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
+const _sfc_main$6 = {};
+function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
+  const _component_v_progress_circular = resolveComponent("v-progress-circular");
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "loading-screen" }, _attrs))} data-v-5482be63>`);
+  _push(ssrRenderComponent(_component_v_progress_circular, {
+    color: "primary",
+    indeterminate: "",
+    size: 100
+  }, null, _parent));
+  _push(`</div>`);
+}
+const _sfc_setup$6 = _sfc_main$6.setup;
+_sfc_main$6.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/shared/loading.vue");
+  return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
+};
+const __nuxt_component_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["ssrRender", _sfc_ssrRender$1], ["__scopeId", "data-v-5482be63"]]);
 const useMyFetch = (request, opts) => {
   const config2 = /* @__PURE__ */ useRuntimeConfig();
   return useFetch(request, { baseURL: config2.public.baseURL, ...opts }, "$pLJOpmWEpt");
 };
+const emitter = mitt();
+const useEvent = emitter.emit;
+const useListen = emitter.on;
 const useCategoriesStore = defineStore("categories", {
   state: () => ({
     categories: [],
@@ -20630,18 +20683,13 @@ const useCategoriesStore = defineStore("categories", {
       this.categories = categoriesData.value.data;
     },
     async getOneCategory(categoryId, page = 1) {
+      await useEvent("loading", true);
       const { data: categoryData } = await useMyFetch(`/categories/${categoryId}`, { params: { page, limit: 10 } });
+      useEvent("loading", false);
       this.current = categoryData.value.data;
     }
   }
 });
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
 const _sfc_main$5 = {
   __name: "menu",
   __ssrInlineRender: true,
@@ -20929,32 +20977,86 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/header/menu.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const __nuxt_component_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-cfe42836"]]);
+const __nuxt_component_0 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-cfe42836"]]);
+const useAnimeStore = defineStore("anime", {
+  state: () => ({
+    anime: {},
+    episodes: {},
+    current: {
+      data: {},
+      episodes: {},
+      episode: {}
+    },
+    search: {}
+  }),
+  actions: {
+    async getAnime(page = 1, queries = {}) {
+      await useEvent("loading", true);
+      const { data: anime } = await useMyFetch("/anime", { params: { page, ...queries } });
+      useEvent("loading", false);
+      this.anime = anime.value.data;
+    },
+    async getEpisodes(page = 1) {
+      await useEvent("loading", true);
+      const { data: episodes } = await useMyFetch("/episodes", { params: { page } });
+      useEvent("loading", false);
+      this.episodes = episodes.value.data;
+    },
+    async searchAnime(query, page = 1) {
+      await useEvent("loading", true);
+      const { data: searchData } = await useMyFetch("/anime", { params: { search: query, page } });
+      useEvent("loading", false);
+      this.search = searchData.value.data;
+    },
+    async getOneAnime(animeId, page = 1) {
+      await useEvent("loading", true);
+      const { data: animeData } = await useMyFetch(`/anime/${animeId}`, { params: { page } });
+      useEvent("loading", false);
+      this.current.data = animeData.value.data.anime;
+      this.current.episodes = animeData.value.data.episodes;
+    },
+    async getOneEpisode(episodeId) {
+      await useEvent("loading", true);
+      const { data: episodeData } = await useMyFetch(`/episodes/${episodeId}`);
+      useEvent("loading", false);
+      this.current.episode = episodeData.value.data;
+    }
+  }
+});
 const _sfc_main$4 = {
   __name: "search",
   __ssrInlineRender: true,
   setup(__props) {
+    const router = useRouter$1();
+    const animeStore = useAnimeStore();
     const searchBoxStatus = ref(false);
     const searchQuery = ref(null);
+    const handelSearchAction = () => {
+      if (router.currentRoute.value.name == "search") {
+        animeStore.searchAnime(searchQuery.value);
+      }
+      router.push({ path: "search", query: { query: searchQuery.value } });
+      searchBoxStatus.value = false;
+    };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
       const _component_v_expand_transition = resolveComponent("v-expand-transition");
       const _component_v_container = resolveComponent("v-container");
       const _component_v_text_field = resolveComponent("v-text-field");
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "search-box" }, _attrs))} data-v-8eb107f4><div class="search-icon" data-v-8eb107f4>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "search-box" }, _attrs))} data-v-5b499eaf><div class="search-icon" data-v-5b499eaf>`);
       _push(ssrRenderComponent(_component_font_awesome_icon, { icon: "fa-solid fa-search" }, null, _parent));
       _push(`</div>`);
       _push(ssrRenderComponent(_component_v_expand_transition, { mode: "out-in" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (searchBoxStatus.value) {
-              _push2(`<div class="box" data-v-8eb107f4${_scopeId}>`);
+              _push2(`<div class="box" data-v-5b499eaf${_scopeId}>`);
               _push2(ssrRenderComponent(_component_v_container, { class: "d-flex align-center justify-center w-100 h-100" }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<div class="close-box" data-v-8eb107f4${_scopeId2}>`);
+                    _push3(`<div class="close-box" data-v-5b499eaf${_scopeId2}>`);
                     _push3(ssrRenderComponent(_component_font_awesome_icon, { icon: "fa-solid fa-times" }, null, _parent3, _scopeId2));
-                    _push3(`</div><div class="search" data-v-8eb107f4${_scopeId2}>`);
+                    _push3(`</div><form class="search" data-v-5b499eaf${_scopeId2}>`);
                     _push3(ssrRenderComponent(_component_v_text_field, {
                       modelValue: searchQuery.value,
                       "onUpdate:modelValue": ($event) => searchQuery.value = $event,
@@ -20962,7 +21064,7 @@ const _sfc_main$4 = {
                       label: "البحث في الموقع",
                       type: "text"
                     }, null, _parent3, _scopeId2));
-                    _push3(`</div>`);
+                    _push3(`</form>`);
                   } else {
                     return [
                       createVNode("div", {
@@ -20971,7 +21073,10 @@ const _sfc_main$4 = {
                       }, [
                         createVNode(_component_font_awesome_icon, { icon: "fa-solid fa-times" })
                       ], 8, ["onClick"]),
-                      createVNode("div", { class: "search" }, [
+                      createVNode("form", {
+                        onSubmit: withModifiers(($event) => handelSearchAction(), ["prevent"]),
+                        class: "search"
+                      }, [
                         createVNode(_component_v_text_field, {
                           modelValue: searchQuery.value,
                           "onUpdate:modelValue": ($event) => searchQuery.value = $event,
@@ -20979,7 +21084,7 @@ const _sfc_main$4 = {
                           label: "البحث في الموقع",
                           type: "text"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                      ])
+                      ], 40, ["onSubmit"])
                     ];
                   }
                 }),
@@ -21003,7 +21108,10 @@ const _sfc_main$4 = {
                     }, [
                       createVNode(_component_font_awesome_icon, { icon: "fa-solid fa-times" })
                     ], 8, ["onClick"]),
-                    createVNode("div", { class: "search" }, [
+                    createVNode("form", {
+                      onSubmit: withModifiers(($event) => handelSearchAction(), ["prevent"]),
+                      class: "search"
+                    }, [
                       createVNode(_component_v_text_field, {
                         modelValue: searchQuery.value,
                         "onUpdate:modelValue": ($event) => searchQuery.value = $event,
@@ -21011,7 +21119,7 @@ const _sfc_main$4 = {
                         label: "البحث في الموقع",
                         type: "text"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                    ])
+                    ], 40, ["onSubmit"])
                   ]),
                   _: 1
                 })
@@ -21031,7 +21139,7 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/header/search.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
-const headerSearch = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-8eb107f4"]]);
+const headerSearch = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-5b499eaf"]]);
 const _sfc_main$3 = {
   __name: "theHeader",
   __ssrInlineRender: true,
@@ -21039,7 +21147,7 @@ const _sfc_main$3 = {
     const scrollShadow = ref(false);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_v_container = resolveComponent("v-container");
-      const _component_headerMenu = __nuxt_component_0$1;
+      const _component_headerMenu = __nuxt_component_0;
       _push(`<header${ssrRenderAttrs(mergeProps({
         class: ["theHeader w-100", { scrollShadow: unref(scrollShadow) }]
       }, _attrs))} data-v-67cadbd1>`);
@@ -21077,7 +21185,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/theHeader.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const __nuxt_component_0 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-67cadbd1"]]);
+const __nuxt_component_1 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-67cadbd1"]]);
 const _wrapIf = (component, props, slots) => {
   props = props === true ? {} : props;
   return { default: () => {
@@ -21086,8 +21194,8 @@ const _wrapIf = (component, props, slots) => {
   } };
 };
 const layouts = {
-  category: () => import('./_nuxt/category-6a7070e8.mjs').then((m) => m.default || m),
-  default: () => import('./_nuxt/default-9e4dc8d3.mjs').then((m) => m.default || m)
+  category: () => import('./_nuxt/category-d998c044.mjs').then((m) => m.default || m),
+  default: () => import('./_nuxt/default-23f67f21.mjs').then((m) => m.default || m)
 };
 const LayoutLoader = /* @__PURE__ */ defineComponent$1({
   name: "LayoutLoader",
@@ -21103,7 +21211,7 @@ const LayoutLoader = /* @__PURE__ */ defineComponent$1({
     };
   }
 });
-const __nuxt_component_1 = /* @__PURE__ */ defineComponent$1({
+const __nuxt_component_2 = /* @__PURE__ */ defineComponent$1({
   name: "NuxtLayout",
   inheritAttrs: false,
   props: {
@@ -21147,7 +21255,7 @@ const generateRouteKey = (routeProps, override) => {
 const wrapInKeepAlive = (props, children) => {
   return { default: () => children };
 };
-const __nuxt_component_2 = /* @__PURE__ */ defineComponent$1({
+const __nuxt_component_3 = /* @__PURE__ */ defineComponent$1({
   name: "NuxtPage",
   inheritAttrs: false,
   props: {
@@ -21246,7 +21354,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/theFooter.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const __nuxt_component_3 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-4ee45b89"]]);
+const __nuxt_component_4 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-4ee45b89"]]);
 const _sfc_main$1 = {
   __name: "app",
   __ssrInlineRender: true,
@@ -21254,14 +21362,24 @@ const _sfc_main$1 = {
     useHead({
       titleTemplate: "Anime Lovers - %s"
     });
+    const loading = ref(true);
+    useListen("loading", (status) => {
+      loading.value = status;
+    });
     const categoriesStore = useCategoriesStore();
     categoriesStore.getCategories();
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_TheHeader = __nuxt_component_0;
-      const _component_NuxtLayout = __nuxt_component_1;
-      const _component_NuxtPage = __nuxt_component_2;
-      const _component_TheFooter = __nuxt_component_3;
+      const _component_sharedLoading = __nuxt_component_0$1;
+      const _component_TheHeader = __nuxt_component_1;
+      const _component_NuxtLayout = __nuxt_component_2;
+      const _component_NuxtPage = __nuxt_component_3;
+      const _component_TheFooter = __nuxt_component_4;
       _push(`<!--[-->`);
+      if (unref(loading)) {
+        _push(ssrRenderComponent(_component_sharedLoading, null, null, _parent));
+      } else {
+        _push(`<!---->`);
+      }
       _push(ssrRenderComponent(_component_TheHeader, null, null, _parent));
       _push(ssrRenderComponent(_component_NuxtLayout, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -21291,8 +21409,8 @@ const _sfc_main = {
   __name: "nuxt-root",
   __ssrInlineRender: true,
   setup(__props) {
-    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-0ce61694.mjs').then((r) => r.default || r));
-    const IslandRenderer = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/island-renderer-b9001900.mjs').then((r) => r.default || r));
+    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-b032d171.mjs').then((r) => r.default || r));
+    const IslandRenderer = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/island-renderer-6b491d36.mjs').then((r) => r.default || r));
     const nuxtApp = useNuxtApp();
     nuxtApp.deferHydration();
     nuxtApp.ssrContext.url;
@@ -21357,5 +21475,5 @@ const plugins = normalizePlugins(_plugins);
 }
 const entry$1 = (ctx) => entry(ctx);
 
-export { _export_sfc as _, __nuxt_component_0$2 as a, useMyFetch as b, createError as c, defineStore as d, entry$1 as default, useRuntimeConfig as e, useCategoriesStore as f, useHead as g, useRoute as u };
+export { _export_sfc as _, __nuxt_component_0$2 as a, useRuntimeConfig as b, createError as c, useRoute as d, entry$1 as default, useCategoriesStore as e, defineStore as f, useEvent as g, useMyFetch as h, useHead as i, useAnimeStore as u };
 //# sourceMappingURL=server.mjs.map
