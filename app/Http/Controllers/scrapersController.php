@@ -125,7 +125,7 @@ class scrapersController extends Controller
         $info = $website->filter('.anime-info')->each(function ($node) {
             return $node->innerText() == "" ? $node->filter('a')->text() : $node->innerText();
         });
-        $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href');
+        $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href') || null;
         $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
         $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
             $title = $node->filter('.episodes-card-title h3 a')->text();
