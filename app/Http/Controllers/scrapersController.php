@@ -12,13 +12,15 @@ use Illuminate\Http\Request;
 use Goutte;
 use Illuminate\Support\Facades\Storage;
 
-class scrapersController extends Controller {
+class scrapersController extends Controller
+{
 
     // Categories
-    public function categories() {
+    public function categories()
+    {
         $website = Goutte::request('GET', 'https://witanime.com/%d9%82%d8%a7%d8%a6%d9%85%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a/');
 
-        $categories = $website->filter('.anime-filter-options > ul li:nth-child(2) .dropdown ul li > a')->each(function($node) {
+        $categories = $website->filter('.anime-filter-options > ul li:nth-child(2) .dropdown ul li > a')->each(function ($node) {
             return $node->text();
         });
 
@@ -32,10 +34,11 @@ class scrapersController extends Controller {
     }
 
     // Statuses
-    public function statuses() {
+    public function statuses()
+    {
         $website = Goutte::request('GET', 'https://witanime.com/%d9%82%d8%a7%d8%a6%d9%85%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a/');
 
-        $statuses = $website->filter('.anime-filter-options > ul li:nth-child(3) .dropdown ul li > a')->each(function($node) {
+        $statuses = $website->filter('.anime-filter-options > ul li:nth-child(3) .dropdown ul li > a')->each(function ($node) {
             return $node->text();
         });
 
@@ -50,10 +53,11 @@ class scrapersController extends Controller {
     }
 
     // Types
-    public function types() {
+    public function types()
+    {
         $website = Goutte::request('GET', 'https://witanime.com/%d9%82%d8%a7%d8%a6%d9%85%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a/');
 
-        $types = $website->filter('.anime-filter-options > ul li:nth-child(4) .dropdown ul li > a')->each(function($node) {
+        $types = $website->filter('.anime-filter-options > ul li:nth-child(4) .dropdown ul li > a')->each(function ($node) {
             return $node->text();
         });
 
@@ -67,30 +71,70 @@ class scrapersController extends Controller {
         return $types;
     }
 
+    // Episode
+    public function episode(Request $request)
+    {
+        $website = Goutte::request('GET', $request->link);
+
+        $title = $website->filter('.all-episodes-list li.episode-active a')->text();
+        $thumbnail = array_values(array_filter(Goutte::click($website->selectLink($website->filter('.anime-page-link a')->text())->link())->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) use ($title) {
+            if ($node->filter('.episodes-card-title h3 a')->text() == $title) {
+                return $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
+            } else {
+                return null;
+            }
+        }), fn ($item) => null !== $item))[0];
+
+        $servers = $website->filter('#episode-watch-content')->each(function ($node) {
+            return $node->filter('#episode-servers li > a')->each(function ($node) {
+                return [
+                    'title' => $node->text(),
+                    'embed_url' => $node->attr('data-ep-url')
+                ];
+            });
+        });
+
+        // Upload Episode Thumbnail
+        $episodeThumbnailUrl = explode('/', parse_url($thumbnail, PHP_URL_PATH));
+        $episodeThumbnailName = array_pop($episodeThumbnailUrl);
+        $episodeThumbnailNewName = md5(rand(0, 999999999)) . '.' . pathinfo($episodeThumbnailName, PATHINFO_EXTENSION);
+        Storage::disk('local')->put("episodes/thumbnails/{$episodeThumbnailNewName}", file_get_contents($thumbnail));
+
+        // Add Episode
+        $episode = Episode::create([
+            'anime_id' => $request->anime,
+            'title' => $title,
+            'servers' => json_encode($servers),
+            'thumbnail' => $episodeThumbnailNewName,
+        ]);
+
+        return $this->successResponse($episode, 'Episode Scraped Successfully');
+    }
 
     // Anime
-    public function anime(Request $request) {
+    public function anime(Request $request)
+    {
         $website = Goutte::request('GET', $request->link);
 
         $title = $website->filter('.anime-details-title')->text();
         $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
-        $categories = $website->filter('.anime-genres li > a')->each(function($node) {
+        $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
             return $node->text();
         });
         $description = $website->filter('.anime-story')->text();
-        $info = $website->filter('.anime-info')->each(function($node) {
+        $info = $website->filter('.anime-info')->each(function ($node) {
             return $node->innerText() == "" ? $node->filter('a')->text() : $node->innerText();
         });
         $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href');
         $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
-        $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function($node) {
+        $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
             $title = $node->filter('.episodes-card-title h3 a')->text();
             $thumbnail = $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
             $episodePage = Goutte::click($node->selectLink($node->filter('a.overlay')->text())->link());
 
             // Episode Page
-            $page = $episodePage->filter('#episode-watch-content')->each(function($node) {
-                return $node->filter('#episode-servers li > a')->each(function($node) {
+            $page = $episodePage->filter('#episode-watch-content')->each(function ($node) {
+                return $node->filter('#episode-servers li > a')->each(function ($node) {
                     return [
                         'title' => $node->text(),
                         'embed_url' => $node->attr('data-ep-url')
@@ -164,11 +208,8 @@ class scrapersController extends Controller {
                 'servers' => json_encode($episode['servers']),
                 'thumbnail' => $episodeThumbnailNewName,
             ]);
-
         }
 
         return $this->successResponse($animeData, 'Anime Scraped Successfully');
-
     }
-
 }

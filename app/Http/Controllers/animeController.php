@@ -45,4 +45,13 @@ class animeController extends Controller
 
         return $this->successResponse($data);
     }
+
+    /*** Dashboard ***/
+
+    public function getAllAnime()
+    {
+        $anime = Anime::paginate(10);
+
+        return $this->successResponse($anime);
+    }
 }
