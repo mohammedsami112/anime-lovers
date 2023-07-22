@@ -28,6 +28,18 @@
                 </template>
             </div>
 
+            <div class="mb-3">
+                <CFormSelect v-model="inputs.mainForm.type" label="type">
+                    <option selected="" value="">Choose...</option>
+                    <option value="admin">Admin</option>
+                </CFormSelect>
+                <template v-if="validate.mainForm.type.$errors">
+                    <div v-for="(error, index) in validate.mainForm.type.$errors" :key="index" class="text-danger mt-2">
+                        {{ error.$message }}
+                    </div>
+                </template>
+            </div>
+
             <CButton color="primary" type="submit" :disabled="loading">{{ loading ? 'loading...' : 'Edit User' }}</CButton>
         </form>
     </Dialog>
@@ -54,6 +66,7 @@ const inputs = reactive({
     mainForm: {
         name: null,
         email: null,
+        type: null,
     },
 })
 
@@ -69,6 +82,9 @@ const rules = computed(() => ({
         email: {
             required: helpers.withMessage('Email Is Required', required),
             email: helpers.withMessage('Email Invalid', email),
+        },
+        type: {
+            required: helpers.withMessage('Type Is Required', required),
         },
     },
 }))
@@ -115,6 +131,7 @@ watch(
         inputs.userId = user.id
         inputs.mainForm.name = user.name
         inputs.mainForm.email = user.email
+        inputs.mainForm.type = user.type
     },
 )
 </script>

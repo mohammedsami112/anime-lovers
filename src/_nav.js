@@ -16,7 +16,7 @@ export default [
     },
     {
         component: 'CNavItem',
-        name: 'Landing Pages',
-        to: '/landing-pages',
+        name: 'Anime',
+        to: '/anime',
     },
 ]

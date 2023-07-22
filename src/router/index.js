@@ -21,18 +21,17 @@ const routes = [
             },
 
             // Categories
-
             {
                 path: '/categories',
                 name: 'Categories',
                 component: () => import('@/views/main/categories.vue'),
             },
 
-            // Landing Pages
+            // Anime
             {
-                path: '/landing-pages',
-                name: 'Landing Pages',
-                component: () => import('@/views/main/landing-pages.vue'),
+                path: '/anime',
+                name: 'Anime',
+                component: () => import('@/views/main/anime.vue'),
             },
 
             {

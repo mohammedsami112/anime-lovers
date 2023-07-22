@@ -21,10 +21,8 @@ export default createStore({
             parents: [],
         },
 
-        landingPages: {
+        anime: {
             data: [],
-            current: {},
-            categories: [],
         },
     },
     mutations: {
@@ -64,14 +62,8 @@ export default createStore({
         },
 
         // Landing Pages
-        SET_LANDING_PAGES(state, payload) {
-            state.landingPages.data = payload
-        },
-        SET_LANDING_PAGE_CATEGORIES(state, payload) {
-            state.landingPages.categories = payload
-        },
-        SET_CURRENT_LANDING_PAGE(state, payload) {
-            state.landingPages.current = payload
+        SET_ANIME(state, payload) {
+            state.anime.data = payload
         },
     },
     actions: {
@@ -98,11 +90,6 @@ export default createStore({
             commit('SET_CURRENT_CATEGORY', categoryData)
         },
 
-        // Landing Pages
-        setCurrentLandingPage({ state, commit }, payload) {
-            let landingPageData = state.landingPages.data.filter((landingPage) => landingPage.id == payload)[0]
-            commit('SET_CURRENT_LANDING_PAGE', landingPageData)
-        },
     },
     modules: {},
 })

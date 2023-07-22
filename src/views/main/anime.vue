@@ -1,12 +1,16 @@
 <template>
     <loadingOverlay v-if="loading"></loadingOverlay>
-    <div class="users-page">
-        <addNewUsers @success="getUsers()"></addNewUsers>
-        <DataTable :value="users" tableStyle="min-width: 50rem;">
+    <addNewAnime @success="getAnime()"></addNewAnime>
+    <div class="categories-page">
+        <DataTable :value="anime" tableStyle="min-width: 50rem;">
             <Column field="id" header="#"></Column>
-            <Column field="name" header="Name"></Column>
-            <Column field="email" header="Email"></Column>
-            <Column field="type" header="Type"></Column>
+            <Column field="title" header="Title"></Column>
+            <Column field="count_episodes" header="Episodes"></Column>
+            <Column header="Categories">
+                <template #body="{ data }">
+                    {{ data.anime_categories.map((category) => category.category.title).join(',') }}
+                </template>
+            </Column>
             <Column field="created_at" header="Created At">
                 <template #body="{ data }">
                     {{ moment(data.create_at).format('YYYY-MM-DD h:m:s') }}
@@ -19,12 +23,12 @@
             </Column>
             <Column header="Actions">
                 <template #body="{ data }">
-                    <editUser @success="getUsers()" :userId="data.id"></editUser>
-                    <Button :disabled="data.id == $store.state.user.data.id" class="mx-2" icon="pi pi-trash" severity="danger" rounded size="small" @click="handelDeleteUser(data.id)" />
+                    <addNewEpisode :animeId="data.id" @success="getAnime()"></addNewEpisode>
+                    <Button class="mx-2" icon="pi pi-trash" severity="danger" rounded size="small" @click="handelDeleteCategory(data.id)" />
                 </template>
             </Column>
         </DataTable>
-        <Paginator @page="getUsers({ page: $event.page + 1 })" class="mt-3" :rows="pagination.rows" :totalRecords="pagination.total"></Paginator>
+        <Paginator @page="getCategories({ page: $event.page + 1 })" class="mt-3" :rows="pagination.rows" :totalRecords="pagination.total"></Paginator>
     </div>
 </template>
 
@@ -36,24 +40,24 @@ import { useToast } from 'primevue/usetoast'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
-import usersApi from '@/controllers/users'
+import animeApi from '@/controllers/anime'
 import Paginator from 'primevue/paginator'
 
-import addNewUsers from '@/components/users/addNewUsers.vue'
-import editUser from '@/components/users/editUser.vue'
+import addNewAnime from '@/components/anime/addNewAnime.vue'
+import addNewEpisode from '@/components/anime/addNewEpisode.vue'
 
 const toast = useToast()
 const loading = ref(false)
-const users = ref([])
+const anime = ref([])
 
-const getUsers = (filters = {}) => {
+const getAnime = (filters = {}) => {
     loading.value = true
-    usersApi
-        .getUsers(filters)
+    animeApi
+        .getAnime(filters)
         .then((response) => {
             console.log(response)
-            store.commit('SET_USERS', response.data.data)
-            users.value = response.data.data
+            store.commit('SET_ANIME', response.data.data)
+            anime.value = response.data.data
             pagination.total = response.data.total
             pagination.rows = response.data.per_page
         })
@@ -68,21 +72,21 @@ const pagination = reactive({
     rows: 0,
 })
 
-// Handel Delete User
-const handelDeleteUser = (userId) => {
+// Handel Delete Category
+const handelDeleteCategory = (userId) => {
     if (confirm('Are You Sure ?')) {
-        usersApi.deleteUsers(userId).then((response) => {
+        categoriesApi.deleteCategory(userId).then((response) => {
             toast.add({
                 severity: 'success',
                 detail: response.message,
                 life: 3000,
             })
-            getUsers()
+            getCategories()
         })
     }
 }
 
 onMounted(() => {
-    getUsers()
+    getAnime()
 })
 </script>

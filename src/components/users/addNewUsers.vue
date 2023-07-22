@@ -20,6 +20,17 @@
                 </template>
             </div>
             <div class="mb-3">
+                <CFormSelect v-model="inputs.mainForm.type" label="type">
+                    <option selected="" value="">Choose...</option>
+                    <option value="admin">Admin</option>
+                </CFormSelect>
+                <template v-if="validate.mainForm.type.$errors">
+                    <div v-for="(error, index) in validate.mainForm.type.$errors" :key="index" class="text-danger mt-2">
+                        {{ error.$message }}
+                    </div>
+                </template>
+            </div>
+            <div class="mb-3">
                 <CFormInput type="password" label="Password" v-model="inputs.mainForm.password" />
                 <template v-if="validate.mainForm.password.$errors">
                     <div v-for="(error, index) in validate.mainForm.password.$errors" :key="index" class="text-danger mt-2">
@@ -59,6 +70,7 @@ const inputs = reactive({
     mainForm: {
         name: null,
         email: null,
+        type: null,
         password: null,
         c_password: null,
     },
@@ -76,6 +88,9 @@ const rules = computed(() => ({
         email: {
             required: helpers.withMessage('Email Is Required', required),
             email: helpers.withMessage('Email Invalid', email),
+        },
+        type: {
+            required: helpers.withMessage('Type Is Required', required),
         },
         password: {
             required: helpers.withMessage('Password Is Required', required),
@@ -104,7 +119,7 @@ const createNewUser = () => {
                     detail: response.message,
                     life: 3000,
                 })
-                inputs.mainForm.name = inputs.mainForm.email = inputs.mainForm.password = inputs.mainForm.c_password = null
+                inputs.mainForm.name = inputs.mainForm.email = inputs.mainForm.type = inputs.mainForm.password = inputs.mainForm.c_password = null
                 validate.value.$reset()
                 addNewUserModel.value = false
             })

@@ -2,7 +2,7 @@ import Api from '@/Api'
 
 export default {
     login(payload) {
-        return Api.post('/auth/login', payload).then((response) => response.data)
+        return Api.post('/auth/login', payload, { params: { type: 'dashboard' } }).then((response) => response.data)
     },
 
     changePassword(payload) {

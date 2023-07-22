@@ -1,15 +1,9 @@
 <template>
     <loadingOverlay v-if="loading"></loadingOverlay>
     <div class="categories-page">
-        <addNewCategories @success="getCategories()"></addNewCategories>
         <DataTable :value="categories" tableStyle="min-width: 50rem;">
             <Column field="id" header="#"></Column>
             <Column field="title" header="Title"></Column>
-            <Column header="Parent">
-                <template #body="{ data }">
-                    {{ data.parent_category == null ? 'null' : data.parent_category.title }}
-                </template>
-            </Column>
             <Column field="created_at" header="Created At">
                 <template #body="{ data }">
                     {{ moment(data.create_at).format('YYYY-MM-DD h:m:s') }}
@@ -22,7 +16,6 @@
             </Column>
             <Column header="Actions">
                 <template #body="{ data }">
-                    <editCategory @success="getCategories()" :categoryId="data.id"></editCategory>
                     <Button class="mx-2" icon="pi pi-trash" severity="danger" rounded size="small" @click="handelDeleteCategory(data.id)" />
                 </template>
             </Column>
@@ -41,9 +34,6 @@ import Column from 'primevue/column'
 import Button from 'primevue/button'
 import categoriesApi from '@/controllers/categories'
 import Paginator from 'primevue/paginator'
-
-import addNewCategories from '@/components/categories/addNewCategories.vue'
-import editCategory from '@/components/categories/editCategory.vue'
 
 const toast = useToast()
 const loading = ref(false)
@@ -87,8 +77,5 @@ const handelDeleteCategory = (userId) => {
 
 onMounted(() => {
     getCategories()
-    categoriesApi.getCategoriesParent().then((response) => {
-        store.commit('SET_CATEGORIES_PARENTS', response.data.data)
-    })
 })
 </script>
