@@ -28,7 +28,7 @@
                 </template>
             </Column>
         </DataTable>
-        <Paginator @page="getCategories({ page: $event.page + 1 })" class="mt-3" :rows="pagination.rows" :totalRecords="pagination.total"></Paginator>
+        <Paginator @page="getAnime({ page: $event.page + 1 })" class="mt-3" :rows="pagination.rows" :totalRecords="pagination.total"></Paginator>
     </div>
 </template>
 
