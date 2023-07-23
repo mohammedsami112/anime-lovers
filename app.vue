@@ -17,7 +17,7 @@ useHead({
   meta: [
     {
       name: 'referrer',
-      content: 'strict-origin-when-cross-origin',
+      content: 'no-referrer-when-downgrade',
     },
   ],
 });
