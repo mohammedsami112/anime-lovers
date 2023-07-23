@@ -15,6 +15,30 @@ use Illuminate\Support\Facades\Storage;
 class scrapersController extends Controller
 {
 
+    // Get YonaPlay Servers
+    private function getAnimeServers($serversList)
+    {
+        foreach ($serversList as $index => $server) {
+            if (parse_url($server['embed_url'])['host'] == 'yonaplay.org') {
+                $serverPage = Goutte::request('GET', $server['embed_url'], ['headers' => ['Referer' => 'https://witanime.com/']]);
+                return $serverPage->filter('.OptionsLangDisp .ODDIV .REactiv li')->each(function ($node) {
+                    $title = $node->filter('p')->text() . ' ' . $node->filter('span')->text();
+                    $htmlDom = new \DOMDocument;
+
+                    @$htmlDom->loadHTML(preg_replace('/(((http|https|ftp|ftps)\:\/\/)|(www\.))[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\:[0-9]+)?(\/\S*)?/', '<a href="$0" target="_blank" rel="noopener noreferrer">$0</a>', $node->attr('onclick')));
+                    $links = $htmlDom->getElementsByTagName('a');
+
+                    $extractedLinks = [];
+                    foreach ($links as $link) {
+                        $extractedLinks = ['title' => $title, 'embed_url' => $link->textContent];
+                    }
+
+                    return $extractedLinks;
+                });
+            }
+        }
+    }
+
     // Categories
     public function categories()
     {
@@ -104,7 +128,7 @@ class scrapersController extends Controller
         $episode = Episode::create([
             'anime_id' => $request->anime,
             'title' => $title,
-            'servers' => json_encode($servers),
+            'servers' => json_encode(array_merge($servers[0], $this->getAnimeServers($servers[0]))),
             'thumbnail' => $episodeThumbnailNewName,
         ]);
 
@@ -114,7 +138,7 @@ class scrapersController extends Controller
     // Anime
     public function anime(Request $request)
     {
-        $website = Goutte::request('GET', $request->link);
+        $website = Goutte::request('GET', $request->link, ['headers' => ['Referer' => 'https://witanime.com/']]);
 
         $title = $website->filter('.anime-details-title')->text();
         $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
@@ -131,6 +155,7 @@ class scrapersController extends Controller
             $trailer = null;
         }
         $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
+
         $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
             $title = $node->filter('.episodes-card-title h3 a')->text();
             $thumbnail = $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
@@ -139,19 +164,22 @@ class scrapersController extends Controller
             // Episode Page
             $page = $episodePage->filter('#episode-watch-content')->each(function ($node) {
                 return $node->filter('#episode-servers li > a')->each(function ($node) {
-                    return [
+                    $servers = [
                         'title' => $node->text(),
                         'embed_url' => $node->attr('data-ep-url')
                     ];
+                    return $servers;
                 });
             });
+
 
             return [
                 'title' => $title,
                 'thumbnail' => $thumbnail,
-                'servers' => $page[0]
+                'servers' => array_merge($page[0], $this->getAnimeServers($page[0]))
             ];
         });
+
 
         $animeData = [
             'title' =>  $title,
