@@ -13,4 +13,8 @@ export default {
     addEpisode(link, anime) {
         return Api.get('/scrapers/episode', { params: { link: link, anime: anime } }).then((response) => response.data)
     },
+
+    deleteAnime(anime) {
+        return Api.post(`/delete/${anime}`).then((response) => response.data)
+    },
 }
