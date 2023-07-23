@@ -14,6 +14,12 @@ import { useCategoriesStore } from '~/store/categories';
 
 useHead({
   titleTemplate: 'Anime Lovers - %s',
+  meta: [
+    {
+      name: 'referrer',
+      content: 'strict-origin-when-cross-origin',
+    },
+  ],
 });
 
 const loading = ref(true);
