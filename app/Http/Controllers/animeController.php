@@ -54,4 +54,13 @@ class animeController extends Controller
 
         return $this->successResponse($anime);
     }
+
+    public function deleteAnime($animeId)
+    {
+        $anime = Anime::find($animeId);
+
+        $anime->delete();
+
+        return $this->successResponse(null, 'Anime Deleted Successfully');
+    }
 }
