@@ -81,7 +81,7 @@ const handelDeleteAnime = (animeId) => {
                 detail: response.message,
                 life: 3000,
             })
-            getCategories()
+            getAnime()
         })
     }
 }
