@@ -15,6 +15,6 @@ export default {
     },
 
     deleteAnime(anime) {
-        return Api.post(`/delete/${anime}`).then((response) => response.data)
+        return Api.post(`/anime/delete/${anime}`).then((response) => response.data)
     },
 }
