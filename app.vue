@@ -35,6 +35,10 @@ useHead({
   ],
   meta: [
     {
+      name: 'monetag',
+      content: '1314fd80502fbcbfe09c00d1525d75d3',
+    },
+    {
       name: 'author',
       content: 'Anime Hart',
     },
