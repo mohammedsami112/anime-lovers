@@ -58,8 +58,10 @@ class animeController extends Controller
     public function deleteAnime($animeId)
     {
         $anime = Anime::find($animeId);
+        $episodes = Episode::where('anime_id', '=', $animeId);
 
         $anime->delete();
+        $episodes->delete();
 
         return $this->successResponse(null, 'Anime Deleted Successfully');
     }

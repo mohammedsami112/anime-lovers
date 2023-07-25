@@ -19,7 +19,7 @@ class scrapersController extends Controller
     private function getAnimeServers($serversList)
     {
         foreach ($serversList as $index => $server) {
-            if (parse_url($server['embed_url'])['host'] == 'yonaplay.org') {
+            if (parse_url($server['embed_url'])['host'] == 'yonaplay.org') { 
                 $serverPage = Goutte::request('GET', $server['embed_url'], ['headers' => ['Referer' => 'https://witanime.com/']]);
                 return $serverPage->filter('.OptionsLangDisp .ODDIV .REactiv li')->each(function ($node) {
                     $title = $node->filter('p')->text() . ' ' . $node->filter('span')->text();
