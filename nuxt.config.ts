@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-swiper',
     '@pinia/nuxt', 
+    'nuxt-simple-sitemap',
     ['@nuxtjs/google-fonts', {
       download: false,
       inject: true,
