@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex">
-    <div class="servers">
+  <div class="d-flex flex-column-reverse flex-md-row episode-player">
+    <div class="servers mt-5 mt-md-0 w-md-auto">
       <h5>اختر سيرفر المشاهدة</h5>
       <ul>
         <li v-for="(server, index) in servers" :key="index" :class="{ active: server.embed_url == selectedServer.embed_url }" @click="handelSelectedServer(server)">{{ server.title }}</li>

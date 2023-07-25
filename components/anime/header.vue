@@ -1,7 +1,7 @@
 <template>
   <div class="anime-header mb-5" style="direction: rtl">
     <v-container>
-      <div class="content d-flex align-center">
+      <div class="content d-flex flex-column flex-md-row align-center">
         <div class="thumbnail ml-5"><img class="w-100" :src="config.public.backendURL + '/storage/thumbnails/' + animeStore.current.data.thumbnail" alt="" /></div>
         <div class="anime-meta mr-5 w-100">
           <h2 class="title">{{ animeStore.current.data.title }}</h2>
@@ -79,7 +79,7 @@ const animeStore = useAnimeStore();
     }
 
     .thumbnail {
-      width: 450px;
+      max-width: 450px;
       img {
         border-radius: 10px;
       }

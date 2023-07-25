@@ -23,3 +23,72 @@ a {
     }
   }
 }
+
+.servers,
+.episode-player,
+.player {
+  @include md {
+    width: 100% !important;
+  }
+}
+
+.next-prev-episodes {
+  .prev {
+    @include sm {
+      margin-top: 10px;
+    }
+  }
+  .next,
+  .prev {
+    @include sm {
+      width: 100%;
+    }
+    button {
+      @include sm {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.anime-header {
+  .content {
+    .thumbnail {
+      @include sm {
+        margin-left: 0 !important;
+      }
+    }
+
+    .anime-meta {
+      @include md {
+        text-align: center;
+      }
+
+      .categories {
+        button {
+          @include sm {
+            margin-top: 4px;
+          }
+        }
+      }
+
+      .anime-links {
+        @include sm {
+          display: flex;
+          flex-direction: column;
+        }
+        a:last-child {
+          @include sm {
+            margin-right: 0 !important;
+            margin-top: 5px;
+          }
+        }
+        button {
+          @include sm {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

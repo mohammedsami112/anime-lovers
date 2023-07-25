@@ -1,9 +1,9 @@
 <template>
-  <div class="episode-header d-flex align-center justify-center mb-5">
+  <div class="episode-header d-flex align-center justify-center mb-5 text-center">
     <div class="content d-flex flex-column align-center justify-center">
       <h2>{{ animeStore.current.episode.anime.title }} - {{ animeStore.current.episode.title }}</h2>
-      <div class="episode-meta d-flex align-center justify-space-between w-100 mt-4">
-        <span class="report"><NuxtLink to="/contact-us">ابلاغ عن مشكلة</NuxtLink> <font-awesome-icon class="ml-2" icon="fa-solid fa-bug" /></span>
+      <div class="episode-meta d-flex align-center justify-center w-100 mt-4">
+        <!-- <span class="report"><NuxtLink to="/contact-us">ابلاغ عن مشكلة</NuxtLink> <font-awesome-icon class="ml-2" icon="fa-solid fa-bug" /></span> -->
         <span class="date">{{ moment(animeStore.current.episode.created_at).format('YYYY-MM-DD') }} <font-awesome-icon class="ml-2" icon="fa-solid fa-clock" /></span>
       </div>
     </div>

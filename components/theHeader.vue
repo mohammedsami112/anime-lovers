@@ -3,7 +3,7 @@
     <v-container class="d-flex justify-space-between align-center">
       <div class="left-icons"><headerSearch></headerSearch></div>
       <div class="logo">
-        <h2>Anime Lovers</h2>
+        <NuxtLink to="/"><h2>Anime Hart</h2></NuxtLink>
       </div>
       <div class="right-icons"><headerMenu></headerMenu></div>
     </v-container>

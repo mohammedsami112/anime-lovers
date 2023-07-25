@@ -1,6 +1,6 @@
 <template>
-  <footer class="d-flex justify-center align-center">
-    <h4>جميع الحقوق محفوظة لموقع Anime Lovers</h4>
+  <footer class="d-flex justify-center align-center text-center">
+    <h4>جميع الحقوق محفوظة لموقع Anime Hart</h4>
   </footer>
 </template>
 <style lang="scss" scoped>
