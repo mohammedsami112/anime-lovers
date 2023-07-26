@@ -2,9 +2,7 @@
   <v-col class="mt-3 ad" cols="12" lg="4" md="4" sm="6">
     <!-- <img src="../../assets/images/test.jpg" alt="" /> -->
 
-    <client-only>
-      <!-- <script src="" data-zone="1412" async data-cfasync="false"></script> -->
-    </client-only>
+    <client-only> </client-only>
   </v-col>
 </template>
 
@@ -12,10 +10,7 @@
 useHead({
   script: [
     {
-      src: 'https://alwingulla.com/88/tag.min.js',
-      'data-zone': 1412,
-      async: true,
-      ' data-cfasync': false,
+      children: `(function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('outoctillerytor.com',6165012,document.createElement('script'))`,
     },
   ],
 });
