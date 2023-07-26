@@ -72,6 +72,7 @@ Route::group(['prefix' => 'categories', 'controller' => categoriesController::cl
 // Anime
 Route::group(['prefix' => 'anime', 'controller' => animeController::class], function () {
     Route::get('/', 'getAnime');
+    Route::post('/trend/{animeId}', 'trendAnime');
     Route::post('/delete/{animeId}', 'deleteAnime');
     Route::get('/{animeId}', 'getOneAnime');
 });

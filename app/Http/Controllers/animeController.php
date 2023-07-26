@@ -48,13 +48,22 @@ class animeController extends Controller
 
     /*** Dashboard ***/
 
-    public function getAllAnime()
+    public function getAllAnime(Request $request)
     {
-        $anime = Anime::paginate(10);
+        $limit = isset($request->limit) ? $request->limit : 10;
+        $anime = Anime::paginate($limit);
 
         return $this->successResponse($anime);
     }
 
+    public function trendAnime(Request $request, $animeId)
+    {
+        $anime = Anime::find($animeId);
+
+        $anime->update(['trend' => $anime->trend == 1 ? 0 : 1]);
+
+        return $this->successResponse(null, 'Anime Added To Trends Successfully');
+    }
     public function deleteAnime($animeId)
     {
         $anime = Anime::find($animeId);
