@@ -3,7 +3,9 @@
     <div class="servers mt-5 mt-md-0 w-md-auto">
       <h5>اختر سيرفر المشاهدة</h5>
       <ul>
-        <li v-for="(server, index) in servers" :key="index" :class="{ active: server.embed_url == selectedServer.embed_url }" @click="handelSelectedServer(server)">{{ server.title }}</li>
+        <li v-for="(server, index) in animeStore.current.episode.servers" :key="index" :class="{ active: server.embed_url == selectedServer.embed_url }" @click="handelSelectedServer(server)">
+          {{ server.title }}
+        </li>
       </ul>
     </div>
     <div class="player">
@@ -16,14 +18,23 @@
 import { useAnimeStore } from '~/store/anime';
 
 const animeStore = useAnimeStore();
-const servers = JSON.parse(animeStore.current.episode.servers);
-const selectedServer = ref();
+const servers = computed(() => {
+  return JSON.parse(animeStore.current.episode.servers);
+});
+const selectedServer = ref(animeStore.current.episode.servers[0]);
 
 const handelSelectedServer = (server) => {
   selectedServer.value = server;
 };
 
-handelSelectedServer(servers[0]);
+// handelSelectedServer(servers);
+
+watch(
+  () => animeStore.current.episode,
+  (episode) => {
+    console.log(episode);
+  }
+);
 </script>
 
 <style lang="scss" scoped>

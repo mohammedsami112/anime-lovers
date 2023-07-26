@@ -47,6 +47,8 @@ export const useAnimeStore = defineStore('anime', {
       const { data: episodeData } = await useMyFetch(`/episodes/${episodeId}`);
       useEvent('loading', false);
 
+      episodeData.value.data.servers = JSON.parse(episodeData.value.data.servers);
+
       this.current.episode = episodeData.value.data;
     },
   },
