@@ -21,9 +21,10 @@
                     {{ moment(data.updated_at).format('YYYY-MM-DD h:m:s') }}
                 </template>
             </Column>
-            <Column header="Actions">
+            <Column header="Actions" class="text-center">
                 <template #body="{ data }">
                     <addNewEpisode :animeId="data.id" @success="getAnime()"></addNewEpisode>
+                    <Button class="mx-2" :icon="data.trend == 1 ? 'pi pi-bookmark-fill' : 'pi pi-bookmark'" severity="help" rounded size="small" @click="handelTrendAnime(data.id)"></Button>
                     <Button class="mx-2" icon="pi pi-trash" severity="danger" rounded size="small" @click="handelDeleteAnime(data.id)" />
                 </template>
             </Column>
@@ -72,10 +73,24 @@ const pagination = reactive({
     rows: 0,
 })
 
-// Handel Delete Category
+// Handel Delete Anime
 const handelDeleteAnime = (animeId) => {
     if (confirm('Are You Sure ?')) {
         animeApi.deleteAnime(animeId).then((response) => {
+            toast.add({
+                severity: 'success',
+                detail: response.message,
+                life: 3000,
+            })
+            getAnime()
+        })
+    }
+}
+
+// Handel Add Anime To Trend
+const handelTrendAnime = (animeId) => {
+    if (confirm('Are You Sure ?')) {
+        animeApi.addAnimeTrend(animeId).then((response) => {
             toast.add({
                 severity: 'success',
                 detail: response.message,
