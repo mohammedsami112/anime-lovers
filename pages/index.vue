@@ -7,6 +7,7 @@
       <homeAd></homeAd>
     </v-row>
   </v-container>
+  <HomeTrend></HomeTrend>
   <homeAnime></homeAnime>
   <HomeEpisodes></HomeEpisodes>
   <HomeTopAnime></HomeTopAnime>
@@ -42,5 +43,9 @@ homeStore.getHomePage();
 
 .top-anime {
   @extend .latest-anime;
+}
+
+.trend-anime {
+  @extend .latest-episodes;
 }
 </style>

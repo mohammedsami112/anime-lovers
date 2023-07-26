@@ -6,6 +6,7 @@ export const useHomeStore = defineStore('home', {
     anime: [],
     top: [],
     episodes: [],
+    trend: [],
   }),
 
   actions: {
@@ -16,6 +17,7 @@ export const useHomeStore = defineStore('home', {
       this.slider = homePageData.value.data.slider;
       this.anime = homePageData.value.data.latest_anime;
       this.top = homePageData.value.data.top_anime;
+      this.trend = homePageData.value.data.trend;
       this.episodes = homePageData.value.data.latest_episodes;
     },
   },
