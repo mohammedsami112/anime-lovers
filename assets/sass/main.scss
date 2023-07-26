@@ -92,3 +92,78 @@ a {
     }
   }
 }
+
+// Dark Mode
+
+.dark {
+  background-color: $dark-bg;
+  .loading-screen {
+    background-color: $dark-bg !important;
+  }
+  .theHeader {
+    background-color: $dark-bg !important;
+    color: #fff !important;
+
+    &.scrollShadow {
+      box-shadow: 1px 1px 10px rgb(0 0 0 / 43%) !important;
+    }
+  }
+  .search-box {
+    .box {
+      background-color: $dark-bg !important;
+    }
+  }
+  .trend-anime,
+  .latest-episodes,
+  footer {
+    background-color: $dark-sec-bg !important;
+  }
+
+  footer {
+    color: #fff;
+  }
+
+  .v-card--variant-elevated,
+  .v-card--variant-flat {
+    background-color: $dark-sec-bg !important;
+    color: #fff;
+  }
+
+  .v-navigation-drawer {
+    background-color: $dark-sec-bg !important;
+  }
+
+  .v-list--nav {
+    .v-list-subheader {
+      color: #f7f7f7;
+    }
+    a {
+      color: #ddd;
+    }
+  }
+
+  .episode-player {
+    .servers {
+      color: #fff;
+      background-color: $dark-bg !important;
+      h5 {
+        color: #fff;
+        background-color: $dark-sec-bg !important;
+      }
+      ul {
+        li {
+          &:hover,
+          &.active {
+            background-color: $dark-sec-bg !important;
+          }
+        }
+      }
+    }
+  }
+
+  .pagination {
+    nav {
+      color: #fff;
+    }
+  }
+}

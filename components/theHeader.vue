@@ -1,7 +1,10 @@
 <template>
   <header class="theHeader w-100" :class="{ scrollShadow: scrollShadow }">
     <v-container class="d-flex justify-space-between align-center">
-      <div class="left-icons"><headerSearch></headerSearch></div>
+      <div class="left-icons d-flex align-center">
+        <HeaderDarkMode></HeaderDarkMode>
+        <headerSearch></headerSearch>
+      </div>
       <div class="logo">
         <NuxtLink to="/"><h2>Anime Hart</h2></NuxtLink>
       </div>
