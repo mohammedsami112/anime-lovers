@@ -24,6 +24,11 @@ definePageMeta({
 });
 
 const route = useRoute();
+
+useHead({
+  title: route.params.title,
+});
+
 const config = useRuntimeConfig();
 const categoriesStore = useCategoriesStore();
 

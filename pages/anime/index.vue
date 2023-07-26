@@ -18,6 +18,10 @@
 <script setup>
 import { useAnimeStore } from '~/store/anime';
 
+useHead({
+  title: 'الانميات',
+});
+
 const route = useRoute();
 const config = useRuntimeConfig();
 const animeStore = useAnimeStore();

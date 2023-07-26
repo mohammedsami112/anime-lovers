@@ -15,7 +15,13 @@
 <script setup>
 import { useHomeStore } from '~/store/home';
 useHead({
-  title: 'Home',
+  title: 'الرئيسية',
+  meta: [
+    {
+      name: 'description',
+      content: 'Anime Hart',
+    },
+  ],
 });
 
 const homeStore = useHomeStore();

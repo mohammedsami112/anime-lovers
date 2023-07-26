@@ -18,6 +18,16 @@
 <script setup>
 import { useAnimeStore } from '~/store/anime';
 
+useHead({
+  title: 'الحلقات',
+  meta: [
+    {
+      name: 'description',
+      content: 'Anime Hart',
+    },
+  ],
+});
+
 const config = useRuntimeConfig();
 const animeStore = useAnimeStore();
 

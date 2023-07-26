@@ -19,6 +19,13 @@ import { useAnimeStore } from '~/store/anime';
 const config = useRuntimeConfig();
 const route = useRoute();
 const animeStore = useAnimeStore();
+const episodeTitle = computed(() => {
+  return animeStore.current.episode.title;
+});
+
+useHead({
+  title: episodeTitle,
+});
 
 const getEpisode = async () => {
   await animeStore.getOneEpisode(route.params.id);

@@ -22,10 +22,26 @@
 
 <script setup>
 import { useAnimeStore } from '~/store/anime';
-
-const config = useRuntimeConfig();
 const route = useRoute();
 const animeStore = useAnimeStore();
+const animeDescription = computed(() => {
+  return animeStore.current.data.description;
+});
+const animeTitle = computed(() => {
+  return animeStore.current.data.title;
+});
+
+useHead({
+  title: animeTitle,
+  meta: [
+    {
+      name: 'description',
+      content: animeDescription,
+    },
+  ],
+});
+
+const config = useRuntimeConfig();
 
 animeStore.getOneAnime(route.params.id);
 </script>
