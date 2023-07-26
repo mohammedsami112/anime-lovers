@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    head: {
+      script: [{children: `(function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://anime-hart.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();`}]
+    }
+  },
   css: ['vuetify/lib/styles/main.sass', 'assets/sass/main.scss', '@fortawesome/fontawesome-svg-core/styles.css'],
   runtimeConfig: {
     public: {
