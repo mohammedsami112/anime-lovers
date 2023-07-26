@@ -12,6 +12,11 @@
     </div>
   </v-container>
   <SharedPagination @change="animeStore.getOneAnime(animeStore.current.episode.anime.id, $event)" :totalPages="animeStore.current.episodes.last_page"></SharedPagination>
+  <ClientOnly>
+    <v-container>
+      <Disqus />
+    </v-container>
+  </ClientOnly>
 </template>
 <script setup>
 import { useAnimeStore } from '~/store/anime';
