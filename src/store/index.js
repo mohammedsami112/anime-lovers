@@ -24,6 +24,10 @@ export default createStore({
         anime: {
             data: [],
         },
+
+        ads: {
+            data: [],
+        },
     },
     mutations: {
         toggleSidebar(state) {
@@ -61,6 +65,11 @@ export default createStore({
             state.categories.current = payload
         },
 
+        // Ads
+        SET_ADS(state, payload) {
+            state.ads.data = payload
+        },
+
         // Landing Pages
         SET_ANIME(state, payload) {
             state.anime.data = payload
@@ -89,7 +98,6 @@ export default createStore({
             let categoryData = state.categories.data.filter((category) => category.id == payload)[0]
             commit('SET_CURRENT_CATEGORY', categoryData)
         },
-
     },
     modules: {},
 })

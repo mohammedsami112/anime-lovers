@@ -19,4 +19,9 @@ export default [
         name: 'Anime',
         to: '/anime',
     },
+    {
+        component: 'CNavItem',
+        name: 'Ads',
+        to: '/ads',
+    },
 ]

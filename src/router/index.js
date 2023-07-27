@@ -34,6 +34,13 @@ const routes = [
                 component: () => import('@/views/main/anime.vue'),
             },
 
+            // Ads
+            {
+                path: '/ads',
+                name: 'Ads',
+                component: () => import('@/views/main/ads.vue'),
+            },
+
             {
                 path: '/dashboard',
                 name: 'Dashboard',
