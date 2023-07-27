@@ -53,7 +53,7 @@ class animeController extends Controller
     public function getAllAnime(Request $request)
     {
         $limit = isset($request->limit) ? $request->limit : 10;
-        $anime = Anime::paginate($limit);
+        $anime = Anime::with('anime_episodes')->paginate($limit);
 
         return $this->successResponse($anime);
     }

@@ -90,6 +90,7 @@ Route::group(['prefix' => 'anime', 'controller' => animeController::class], func
 Route::group(['prefix' => 'episodes', 'controller' => episodesController::class], function () {
 
     Route::get('/', 'getEpisodes');
+    Route::post('/add-comment/{episodeId}', 'addEpisodeComment')->middleware('auth:sanctum');
     Route::get('/{episodeId}', 'getOneEpisode');
 });
 

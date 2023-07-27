@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class episodesController extends Controller
 {
@@ -26,5 +27,25 @@ class episodesController extends Controller
         $episode['prev_episode'] = $prevEpisode;
 
         return $this->successResponse($episode);
+    }
+
+    public function addEpisodeComment(Request $request, $episodeId)
+    {
+
+        $validate = Validator::make($request->all(), [
+            'comment' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            return $this->errorResponse('Validation Error', $validate->errors(), 400);
+        }
+
+        $episode = Episode::find($episodeId);
+
+        $episode->update([
+            'comment' => $request->comment
+        ]);
+
+        return $this->successResponse(null, 'Comment Added Successfully');
     }
 }

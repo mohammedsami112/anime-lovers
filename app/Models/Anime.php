@@ -44,4 +44,9 @@ class Anime extends Model
     {
         return $this->hasMany(SelectedCategory::class, 'anime_id', 'id');
     }
+
+    public function anime_episodes()
+    {
+        return $this->hasMany(Episode::class, 'anime_id', 'id')->without(['anime'])->select(['id', 'anime_id', 'title', 'comment']);
+    }
 }
