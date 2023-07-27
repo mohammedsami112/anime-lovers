@@ -7,18 +7,7 @@
 </template>
 
 <script setup>
-useHead({
-  script: [
-    {
-      body: true,
-      children: `(function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('outoctillerytor.com',6165012,document.createElement('script'))`,
-    },
-  ],
-});
 
-onMounted(() => {
-  let adElement = document.querySelector('.ad');
-});
 </script>
 
 <style lang="scss" scoped>
