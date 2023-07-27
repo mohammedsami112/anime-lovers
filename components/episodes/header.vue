@@ -2,6 +2,7 @@
   <div class="episode-header d-flex align-center justify-center mb-5 text-center">
     <div class="content d-flex flex-column align-center justify-center">
       <h2>{{ animeStore.current.episode.anime.title }} - {{ animeStore.current.episode.title }}</h2>
+      <p class="mt-3" v-if="animeStore.current.episode.comment != null">{{ animeStore.current.episode.comment }}</p>
       <div class="episode-meta d-flex align-center justify-center w-100 mt-4">
         <!-- <span class="report"><NuxtLink to="/contact-us">ابلاغ عن مشكلة</NuxtLink> <font-awesome-icon class="ml-2" icon="fa-solid fa-bug" /></span> -->
         <span class="date">{{ moment(animeStore.current.episode.created_at).format('YYYY-MM-DD') }} <font-awesome-icon class="ml-2" icon="fa-solid fa-clock" /></span>
@@ -23,6 +24,7 @@ const animeStore = useAnimeStore();
   height: 266px;
   position: relative;
   h2,
+  p,
   .episode-meta {
     position: relative;
     z-index: 9;
