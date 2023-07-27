@@ -18,6 +18,10 @@ export default {
         return Api.post(`/anime/trend/${anime}`).then((response) => response.data)
     },
 
+    addEpisodeComment(inputs) {
+        return Api.post(`/episodes/add-comment/${inputs.episode}`, inputs).then((response) => response.data)
+    },
+
     deleteAnime(anime) {
         return Api.post(`/anime/delete/${anime}`).then((response) => response.data)
     },

@@ -24,8 +24,9 @@
             <Column header="Actions" class="text-center">
                 <template #body="{ data }">
                     <addNewEpisode :animeId="data.id" @success="getAnime()"></addNewEpisode>
-                    <Button class="mx-2" :icon="data.trend == 1 ? 'pi pi-bookmark-fill' : 'pi pi-bookmark'" severity="help" rounded size="small" @click="handelTrendAnime(data.id)"></Button>
-                    <Button class="mx-2" icon="pi pi-trash" severity="danger" rounded size="small" @click="handelDeleteAnime(data.id)" />
+                    <addEpisodeComment :animeId="data.id" @success="getAnime()"></addEpisodeComment>
+                    <Button class="mx-2 mt-2" :icon="data.trend == 1 ? 'pi pi-bookmark-fill' : 'pi pi-bookmark'" severity="help" rounded size="small" @click="handelTrendAnime(data.id)"></Button>
+                    <Button class="mx-2 mt-2" icon="pi pi-trash" severity="danger" rounded size="small" @click="handelDeleteAnime(data.id)" />
                 </template>
             </Column>
         </DataTable>
@@ -46,6 +47,7 @@ import Paginator from 'primevue/paginator'
 
 import addNewAnime from '@/components/anime/addNewAnime.vue'
 import addNewEpisode from '@/components/anime/addNewEpisode.vue'
+import addEpisodeComment from '@/components/anime/addEpisodeComment.vue'
 
 const toast = useToast()
 const loading = ref(false)

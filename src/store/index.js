@@ -23,6 +23,7 @@ export default createStore({
 
         anime: {
             data: [],
+            current: {},
         },
 
         ads: {
@@ -70,9 +71,12 @@ export default createStore({
             state.ads.data = payload
         },
 
-        // Landing Pages
+        // Anime
         SET_ANIME(state, payload) {
             state.anime.data = payload
+        },
+        SET_CURRENT_ANIME(state, payload) {
+            state.anime.current = payload
         },
     },
     actions: {
@@ -97,6 +101,12 @@ export default createStore({
         setCurrentCategory({ state, commit }, payload) {
             let categoryData = state.categories.data.filter((category) => category.id == payload)[0]
             commit('SET_CURRENT_CATEGORY', categoryData)
+        },
+
+        // Anime
+        setCurrentAnime({ state, commit }, payload) {
+            let animeData = state.anime.data.filter((anime) => anime.id == payload)[0]
+            commit('SET_CURRENT_ANIME', animeData)
         },
     },
     modules: {},
