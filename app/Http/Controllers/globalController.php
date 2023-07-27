@@ -18,6 +18,7 @@ class globalController extends Controller
         $topAnimes = Anime::orderBy('views', 'DESC')->take(8)->get();
         $trending = Anime::where('trend', '=', 1)->orderBy('id', 'DESC')->get();
         $latestEpisodes = Episode::orderBy('id', 'DESC')->take(8)->get();
+        $mostLikes = DB::table('anime')->inRandomOrder()->limit(8)->get();
         $ads = DB::table('ads')
             ->inRandomOrder()
             ->limit(3)
@@ -28,7 +29,8 @@ class globalController extends Controller
             'top_anime' => $topAnimes,
             'latest_episodes' => $latestEpisodes,
             'trend' => $trending,
-            'ads' => $ads
+            'ads' => $ads,
+            'most_likes' => $mostLikes
         ];
 
         return $this->successResponse($home);
