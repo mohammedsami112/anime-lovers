@@ -7,6 +7,9 @@
     <div class="next-prev-episodes d-flex flex-column flex-sm-row align-center justify-space-between w-100 mt-5">
       <episodesButtons v-if="Object.keys(animeStore.current.episode)"></episodesButtons>
     </div>
+    <div class="download-episodes mt-5">
+      <episodesDownload></episodesDownload>
+    </div>
     <div class="related-episodes mt-5">
       <episodesRelated></episodesRelated>
     </div>

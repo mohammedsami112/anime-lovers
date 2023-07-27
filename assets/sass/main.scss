@@ -51,6 +51,19 @@ a {
   }
 }
 
+.download-links {
+  a {
+    @include md {
+      margin-top: 10px;
+    }
+    button {
+      @include md {
+        width: 100%;
+      }
+    }
+  }
+}
+
 .anime-header {
   .content {
     .thumbnail {
@@ -145,16 +158,16 @@ a {
   .episode-player {
     .servers {
       color: #fff;
-      background-color: $dark-bg !important;
+      background-color: $dark-sec-bg !important;
       h5 {
         color: #fff;
-        background-color: $dark-sec-bg !important;
+        background-color: $dark-bg !important;
       }
       ul {
         li {
           &:hover,
           &.active {
-            background-color: $dark-sec-bg !important;
+            background-color: $dark-bg !important;
           }
         }
       }

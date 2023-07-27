@@ -48,6 +48,7 @@ export const useAnimeStore = defineStore('anime', {
       useEvent('loading', false);
 
       episodeData.value.data.servers = JSON.parse(episodeData.value.data.servers);
+      episodeData.value.data.download = JSON.parse(episodeData.value.data.download);
 
       this.current.episode = episodeData.value.data;
     },
