@@ -7,6 +7,10 @@ export default defineNuxtConfig({
         {children: `(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://inklinkor.com/tag.min.js',6165755,document.body||document.documentElement)`},
         {
           src: '//pl20168992.highwaycpmrevenue.com/b6/dc/36/b6dc3695b99827885c84cf3d7548bf18.js'
+        },
+        {
+          src: '//dgyrizngtcfck.cloudfront.net/?irygd=994512',
+          'data-cfasync': false,
         }
       ]
     }
