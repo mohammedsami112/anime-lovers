@@ -21,7 +21,7 @@ const animeStore = useAnimeStore();
 <style lang="scss" scoped>
 .episode-header {
   background: url('~/assets/images/background.png') center center fixed;
-  height: 266px;
+  height: 230px;
   position: relative;
   h2,
   p,
