@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adsController;
 use App\Http\Controllers\animeController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\categoriesController;
@@ -62,6 +63,14 @@ Route::group(['middleware' => ['auth:sanctum', 'check.admin']], function () {
     });
 });
 
+// Ads
+Route::group(['prefix' => 'ads', 'controller' => adsController::class, 'middleware' => ['auth:sanctum', 'check.admin']], function () {
+
+    Route::get('/', 'list');
+    Route::post('/create', 'create');
+    Route::post('/delete/{adId}', 'delete');
+});
+
 
 // Categories
 Route::group(['prefix' => 'categories', 'controller' => categoriesController::class], function () {
@@ -83,6 +92,8 @@ Route::group(['prefix' => 'episodes', 'controller' => episodesController::class]
     Route::get('/', 'getEpisodes');
     Route::get('/{episodeId}', 'getOneEpisode');
 });
+
+
 
 // Global
 Route::group(['controller' => globalController::class], function () {
