@@ -28,7 +28,7 @@ class animeController extends Controller
         return $this->successResponse($anime);
     }
 
-    public function getOneAnime($animeId)
+    public function getOneAnime(Request $request, $animeId)
     {
         $anime = Anime::find($animeId);
 
@@ -36,7 +36,9 @@ class animeController extends Controller
             return $this->errorResponse('Anime Not Found', []);
         }
 
-        $animeEpisodes = Episode::where('anime_id', '=', $anime->id)->paginate(10);
+        $animeEpisodes = Episode::where('anime_id', '=', $anime->id)->when($request->search, function ($query, $search) {
+            $query->where('title', 'LIKE', "%$search%");
+        })->paginate(10);
 
         $data = [
             'anime' => $anime,
