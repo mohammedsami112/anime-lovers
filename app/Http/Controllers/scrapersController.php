@@ -118,6 +118,16 @@ class scrapersController extends Controller
             });
         });
 
+        // Episode Download
+        $download = $website->filter('.episode-download-container')->each(function ($node) {
+            return $node->filter('.quality-list li:not(li:first-child) > a')->each(function ($node) {
+                return [
+                    'title' => $node->text(),
+                    'url' => $node->attr('href')
+                ];
+            });
+        });
+
         // Upload Episode Thumbnail
         $episodeThumbnailUrl = explode('/', parse_url($thumbnail, PHP_URL_PATH));
         $episodeThumbnailName = array_pop($episodeThumbnailUrl);
@@ -130,6 +140,7 @@ class scrapersController extends Controller
             'title' => $title,
             'servers' => json_encode($this->getAnimeServers($servers[0]) == null ? $servers[0] : array_merge($servers[0], $this->getAnimeServers($servers[0]))),
             'thumbnail' => $episodeThumbnailNewName,
+            'download' => $download[0]
         ]);
 
         return $this->successResponse($episode, 'Episode Scraped Successfully');
