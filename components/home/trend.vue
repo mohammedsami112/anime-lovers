@@ -2,7 +2,7 @@
   <div class="trend-anime">
     <v-container>
       <div class="section-header mb-4 d-flex justify-space-between align-center flex-sm-row flex-column">
-        <h4 class="section-title w-sm-100">الانميات المثبتة</h4>
+        <h4 class="section-title w-sm-100">Trending Now</h4>
         <!-- <NuxtLink to="/anime">
             <v-btn variant="tonal" color="primary"> جميع الانميات </v-btn>
           </NuxtLink> -->
