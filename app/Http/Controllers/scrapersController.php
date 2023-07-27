@@ -19,7 +19,7 @@ class scrapersController extends Controller
     private function getAnimeServers($serversList)
     {
         foreach ($serversList as $index => $server) {
-            if (parse_url($server['embed_url'])['host'] == 'yonaplay.org') { 
+            if (parse_url($server['embed_url'])['host'] == 'yonaplay.org') {
                 $serverPage = Goutte::request('GET', $server['embed_url'], ['headers' => ['Referer' => 'https://witanime.com/']]);
                 return $serverPage->filter('.OptionsLangDisp .ODDIV .REactiv li')->each(function ($node) {
                     $title = $node->filter('p')->text() . ' ' . $node->filter('span')->text();
@@ -172,11 +172,22 @@ class scrapersController extends Controller
                 });
             });
 
+            // Episode Download
+            $download = $episodePage->filter('.episode-download-container')->each(function ($node) {
+                return $node->filter('.quality-list li:not(li:first-child) > a')->each(function ($node) {
+                    return [
+                        'title' => $node->text(),
+                        'url' => $node->attr('href')
+                    ];
+                });
+            });
+
 
             return [
                 'title' => $title,
                 'thumbnail' => $thumbnail,
-                'servers' => $this->getAnimeServers($page[0]) == null ? $page[0] : array_merge($page[0], $this->getAnimeServers($page[0]))
+                'servers' => $this->getAnimeServers($page[0]) == null ? $page[0] : array_merge($page[0], $this->getAnimeServers($page[0])),
+                'download' => $download[0]
             ];
         });
 
@@ -238,6 +249,7 @@ class scrapersController extends Controller
                 'anime_id' => $animeProfile->id,
                 'title' => $episode['title'],
                 'servers' => json_encode($episode['servers']),
+                'download' => json_encode($episode['download']),
                 'thumbnail' => $episodeThumbnailNewName,
             ]);
         }
