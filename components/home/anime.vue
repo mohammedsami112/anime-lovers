@@ -11,7 +11,7 @@
         <v-col class="mt-3" cols="12" lg="3" md="4" sm="6" v-for="anime in homeStore.anime" :key="anime.id">
           <NuxtLink :to="'/anime/' + anime.id + '-' + anime.slug">
             <v-card>
-              <v-img :src="config.public.backendURL + '/storage/thumbnails/' + anime.thumbnail" cover height="200px"></v-img>
+              <v-img :src="config.public.backendURL + '/storage/thumbnails/' + anime.thumbnail" cover height="300px"></v-img>
               <v-card-title class="text-center">{{ anime.title }}</v-card-title>
             </v-card>
           </NuxtLink>
