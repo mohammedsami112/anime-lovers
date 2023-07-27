@@ -11,6 +11,7 @@
   <homeAnime></homeAnime>
   <HomeEpisodes></HomeEpisodes>
   <HomeTopAnime></HomeTopAnime>
+  <HomeMostLikes></HomeMostLikes>
 </template>
 
 <script setup>
@@ -46,6 +47,10 @@ homeStore.getHomePage();
 }
 
 .trend-anime {
+  @extend .latest-episodes;
+}
+
+.like-anime {
   @extend .latest-episodes;
 }
 </style>
