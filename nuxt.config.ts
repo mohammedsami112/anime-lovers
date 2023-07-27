@@ -18,6 +18,12 @@ export default defineNuxtConfig({
           'data-siteid': '332711',
           async: true,
           'data-cfasync': false
+        },
+        {
+          src: '//achcdn.com/script/atg.js',
+          'data-cfasync': false,
+          "data-adel": 'atag',
+          "czid": "qxyx6hwb1i"
         }
       ]
     }
