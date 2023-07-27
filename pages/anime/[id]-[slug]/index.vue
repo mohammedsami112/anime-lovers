@@ -4,6 +4,16 @@
   <v-container class="mt-5">
     <div class="section-header mb-4 d-flex justify-space-between align-center flex-sm-row flex-column">
       <h4 class="section-title w-sm-100">حلقات الانمي</h4>
+      <div class="w-25 episodes-search">
+        <v-text-field
+          v-model="searchEpisode"
+          @change="animeStore.getOneAnime(route.params.id, 1, searchEpisode)"
+          variant="underlined"
+          label="البحث عن حلقة"
+          type="input"
+          hint="اضغط على زر Enter للبحث"
+        ></v-text-field>
+      </div>
     </div>
     <v-row>
       <v-col class="mt-3" cols="12" lg="3" md="4" sm="6" v-for="episode in animeStore.current.episodes.data" :key="episode.id">
@@ -30,6 +40,8 @@ const animeDescription = computed(() => {
 const animeTitle = computed(() => {
   return animeStore.current.data.title;
 });
+
+const searchEpisode = ref(null);
 
 useHead({
   title: animeTitle,

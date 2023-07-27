@@ -34,9 +34,9 @@ export const useAnimeStore = defineStore('anime', {
 
       this.search = searchData.value.data;
     },
-    async getOneAnime(animeId, page = 1) {
+    async getOneAnime(animeId, page = 1, search = null) {
       await useEvent('loading', true);
-      const { data: animeData } = await useMyFetch(`/anime/${animeId}`, { params: { page: page } });
+      const { data: animeData } = await useMyFetch(`/anime/${animeId}`, { params: { page: page, search: search } });
       useEvent('loading', false);
 
       this.current.data = animeData.value.data.anime;

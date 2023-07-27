@@ -106,6 +106,15 @@ a {
   }
 }
 
+.episodes-search {
+  @include md {
+    width: 50% !important;
+  }
+  @include sm {
+    width: 100% !important;
+  }
+}
+
 // Dark Mode
 
 .dark {
@@ -178,5 +187,9 @@ a {
     nav {
       color: #fff;
     }
+  }
+
+  .episodes-search {
+    color: #fff;
   }
 }
