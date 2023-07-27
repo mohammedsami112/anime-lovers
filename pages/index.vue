@@ -2,9 +2,9 @@
   <homeSlider></homeSlider>
   <v-container>
     <v-row class="mb-4">
-      <homeAd></homeAd>
-      <homeAd></homeAd>
-      <homeAd></homeAd>
+      <homeAd v-for="ad in homeStore.ads" :key="ad.id" :ad="ad"></homeAd>
+      <!-- <homeAd></homeAd>
+      <homeAd></homeAd> -->
     </v-row>
   </v-container>
   <HomeTrend></HomeTrend>

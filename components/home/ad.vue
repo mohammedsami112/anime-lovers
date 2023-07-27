@@ -1,13 +1,14 @@
 <template>
   <v-col class="mt-3 ad" cols="12" lg="4" md="4" sm="6">
-    <!-- <img src="../../assets/images/test.jpg" alt="" /> -->
-    <div class="ad"></div>
-    <client-only> </client-only>
+    <a :href="props.ad.url" target="_blank">
+      <img :src="config.public.backendURL + props.ad.image" />
+    </a>
   </v-col>
 </template>
 
 <script setup>
-
+const props = defineProps(['ad']);
+const config = useRuntimeConfig();
 </script>
 
 <style lang="scss" scoped>
