@@ -11,6 +11,13 @@ export default defineNuxtConfig({
         {
           src: '//dgyrizngtcfck.cloudfront.net/?irygd=994512',
           'data-cfasync': false,
+        },
+        {
+          src: 'https://richinfo.co/richpartners/pops/js/richads-pu-ob.js',
+          'data-pubid': '888350',
+          'data-siteid': '332711',
+          async: true,
+          'data-cfasync': false
         }
       ]
     }
