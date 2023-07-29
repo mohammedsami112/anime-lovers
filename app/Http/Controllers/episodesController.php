@@ -32,18 +32,10 @@ class episodesController extends Controller
     public function addEpisodeComment(Request $request, $episodeId)
     {
 
-        $validate = Validator::make($request->all(), [
-            'comment' => 'required'
-        ]);
-
-        if ($validate->fails()) {
-            return $this->errorResponse('Validation Error', $validate->errors(), 400);
-        }
-
         $episode = Episode::find($episodeId);
 
         $episode->update([
-            'comment' => $request->comment
+            'comment' => $request->comment == "" || $request->comment == null ? null : $request->comment
         ]);
 
         return $this->successResponse(null, 'Comment Added Successfully');
