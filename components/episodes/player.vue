@@ -21,7 +21,7 @@ const animeStore = useAnimeStore();
 const servers = computed(() => {
   return JSON.parse(animeStore.current.episode.servers);
 });
-const selectedServer = ref(null);
+const selectedServer = ref(0);
 
 const handelSelectedServer = (server) => {
   selectedServer.value = server;
