@@ -35,6 +35,8 @@ class scrapersController extends Controller
 
                     return $extractedLinks;
                 });
+            } else {
+                return null;
             }
         }
     }
@@ -165,7 +167,12 @@ class scrapersController extends Controller
         } catch (\Exception  $e) {
             $trailer = null;
         }
-        $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
+
+        try {
+            $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
+        } catch (\Exception $e) {
+            $mal_site = null;
+        }
 
         $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
             $title = $node->filter('.episodes-card-title h3 a')->text();
