@@ -8,23 +8,6 @@ export default defineNuxtConfig({
         {
           src: '//pl20168992.highwaycpmrevenue.com/b6/dc/36/b6dc3695b99827885c84cf3d7548bf18.js'
         },
-        {
-          src: '//dgyrizngtcfck.cloudfront.net/?irygd=994512',
-          'data-cfasync': false,
-        },
-        {
-          src: 'https://richinfo.co/richpartners/pops/js/richads-pu-ob.js',
-          'data-pubid': '888350',
-          'data-siteid': '332711',
-          async: true,
-          'data-cfasync': false
-        },
-        {
-          src: '//achcdn.com/script/atg.js',
-          'data-cfasync': false,
-          "data-adel": 'atag',
-          "czid": "qxyx6hwb1i"
-        }
       ]
     }
   },

@@ -36,12 +36,14 @@
       }"
     >
       <SwiperSlide v-for="slider in homeStore.slider" :key="slider.id">
-        <img :src="config.public.backendURL + '/storage/thumbnails/' + slider.thumbnail" alt="" />
-        <div class="content">
-          <div class="content-item">
-            <h3>{{ slider.title }}</h3>
+        <NuxtLink :to="'/anime/' + slider.id + '-' + slider.slug">
+          <img :src="config.public.backendURL + '/storage/thumbnails/' + slider.thumbnail" alt="" />
+          <div class="content">
+            <div class="content-item">
+              <h3>{{ slider.title }}</h3>
+            </div>
           </div>
-        </div>
+        </NuxtLink>
       </SwiperSlide>
     </Swiper>
   </v-container>
