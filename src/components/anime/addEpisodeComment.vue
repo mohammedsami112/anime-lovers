@@ -15,11 +15,6 @@
         <form @submit.prevent="addNewEpisode">
             <div class="mb-3">
                 <CFormInput type="text" label="Comment" v-model="inputs.mainForm.comment" />
-                <template v-if="validate.mainForm.comment.$errors">
-                    <div v-for="(error, index) in validate.mainForm.comment.$errors" :key="index" class="text-danger mt-2">
-                        {{ error.$message }}
-                    </div>
-                </template>
             </div>
             <div class="mb-3">
                 <CFormSelect label="Episode" v-model="inputs.mainForm.episode">
@@ -68,9 +63,6 @@ const $externalResults = reactive({
 
 const rules = computed(() => ({
     mainForm: {
-        comment: {
-            required: helpers.withMessage('Comment Is Required', required),
-        },
         episode: {
             required: helpers.withMessage('Episode Is Required', required),
         },
