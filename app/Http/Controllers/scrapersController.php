@@ -151,7 +151,7 @@ class scrapersController extends Controller
     // Anime
     public function anime(Request $request)
     {
-        $website = Goutte::request('GET', 'http://api.scraperapi.com?api_key=d746d3ceb1d8046035973a4d78834eed&url=' . $request->link . '',);
+        $website = Goutte::request('GET', 'http://api.scraperapi.com?api_key=d746d3ceb1d8046035973a4d78834eed&url=' . $request->link . '', ['headers' => ['Referer' => 'https://witanime.org/']]);
 
         $title = $website->filter('.anime-details-title')->text();
         $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
