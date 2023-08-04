@@ -151,127 +151,127 @@ class scrapersController extends Controller
     // Anime
     public function anime(Request $request)
     {
-        $website = Goutte::request('GET', $request->link);
+        $website = Goutte::request('GET', $request->link, ['headers' => ['Referer' => 'https://witanime.org/']]);
+        dd($website);
+        // $title = $website->filter('.anime-details-title')->text();
+        // $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
+        // $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
+        //     return $node->text();
+        // });
+        // $description = $website->filter('.anime-story')->text();
+        // $info = $website->filter('.anime-info')->each(function ($node) {
+        //     return $node->innerText() == "" ? $node->filter('a')->text() : $node->innerText();
+        // });
+        // try {
+        //     $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href');
+        // } catch (\Exception  $e) {
+        //     $trailer = null;
+        // }
 
-        $title = $website->filter('.anime-details-title')->text();
-        $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
-        $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
-            return $node->text();
-        });
-        $description = $website->filter('.anime-story')->text();
-        $info = $website->filter('.anime-info')->each(function ($node) {
-            return $node->innerText() == "" ? $node->filter('a')->text() : $node->innerText();
-        });
-        try {
-            $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href');
-        } catch (\Exception  $e) {
-            $trailer = null;
-        }
+        // try {
+        //     $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
+        // } catch (\Exception $e) {
+        //     $mal_site = null;
+        // }
 
-        try {
-            $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
-        } catch (\Exception $e) {
-            $mal_site = null;
-        }
+        // $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
+        //     $title = $node->filter('.episodes-card-title h3 a')->text();
+        //     $thumbnail = $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
+        //     $episodePage = Goutte::click($node->selectLink($node->filter('a.overlay')->text())->link());
 
-        $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
-            $title = $node->filter('.episodes-card-title h3 a')->text();
-            $thumbnail = $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
-            $episodePage = Goutte::click($node->selectLink($node->filter('a.overlay')->text())->link());
+        //     // Episode Page
+        //     $page = $episodePage->filter('#episode-watch-content')->each(function ($node) {
+        //         return $node->filter('#episode-servers li > a')->each(function ($node) {
+        //             $servers = [
+        //                 'title' => $node->text(),
+        //                 'embed_url' => $node->attr('data-ep-url')
+        //             ];
+        //             return $servers;
+        //         });
+        //     });
 
-            // Episode Page
-            $page = $episodePage->filter('#episode-watch-content')->each(function ($node) {
-                return $node->filter('#episode-servers li > a')->each(function ($node) {
-                    $servers = [
-                        'title' => $node->text(),
-                        'embed_url' => $node->attr('data-ep-url')
-                    ];
-                    return $servers;
-                });
-            });
-
-            // Episode Download
-            $download = $episodePage->filter('.episode-download-container')->each(function ($node) {
-                return $node->filter('.quality-list li:not(li:first-child) > a')->each(function ($node) {
-                    return [
-                        'title' => $node->text(),
-                        'url' => $node->attr('href')
-                    ];
-                });
-            });
-
-
-            return [
-                'title' => $title,
-                'thumbnail' => $thumbnail,
-                'servers' => $this->getAnimeServers($page[0]) == null ? $page[0] : array_merge($page[0], $this->getAnimeServers($page[0])),
-                'download' => $download[0]
-            ];
-        });
+        //     // Episode Download
+        //     $download = $episodePage->filter('.episode-download-container')->each(function ($node) {
+        //         return $node->filter('.quality-list li:not(li:first-child) > a')->each(function ($node) {
+        //             return [
+        //                 'title' => $node->text(),
+        //                 'url' => $node->attr('href')
+        //             ];
+        //         });
+        //     });
 
 
-        $animeData = [
-            'title' =>  $title,
-            'thumbnail' => $thumbnail,
-            'categories' => $categories,
-            'description' => $description,
-            'teaser' => $trailer,
-            'mal_site' => $mal_site,
-            'type' => $info[0],
-            'start_from' => $info[1],
-            'status' => $info[2],
-            'source' => $info[6],
-            'episodes' => $episodes
-        ];
+        //     return [
+        //         'title' => $title,
+        //         'thumbnail' => $thumbnail,
+        //         'servers' => $this->getAnimeServers($page[0]) == null ? $page[0] : array_merge($page[0], $this->getAnimeServers($page[0])),
+        //         'download' => $download[0]
+        //     ];
+        // });
 
 
-        /** Create Anime Profile **/
-        // Upload Thumbnail
-        $thumbnailUrl = explode('/', parse_url($animeData['thumbnail'], PHP_URL_PATH));
-        $thumbnailName = array_pop($thumbnailUrl);
-        $thumbnailNewName = md5(rand(0, 999999999)) . '.' . pathinfo($thumbnailName, PATHINFO_EXTENSION);
-        Storage::disk('local')->put("thumbnails/{$thumbnailNewName}", file_get_contents($animeData['thumbnail']));
+        // $animeData = [
+        //     'title' =>  $title,
+        //     'thumbnail' => $thumbnail,
+        //     'categories' => $categories,
+        //     'description' => $description,
+        //     'teaser' => $trailer,
+        //     'mal_site' => $mal_site,
+        //     'type' => $info[0],
+        //     'start_from' => $info[1],
+        //     'status' => $info[2],
+        //     'source' => $info[6],
+        //     'episodes' => $episodes
+        // ];
 
-        // Create Profile
-        $animeProfile = Anime::create([
-            'title' => $animeData['title'],
-            'thumbnail' => $thumbnailNewName,
-            'description' => $animeData['description'],
-            'type' => Type::where('title', '=', "{$animeData['type']}")->first()->id,
-            'status' => Status::where('title', '=', "{$animeData['status']}")->first()->id,
-            'source' => $animeData['source'],
-            'start_from' => $animeData['start_from'],
-            'teaser' => $animeData['teaser'],
-            'mal_site' => $animeData['mal_site']
-        ]);
 
-        // Add Anime Categories
-        foreach ($animeData['categories'] as $category) {
-            $selectedCategory = Category::where('title', '=', trim($category))->first()->id;
-            SelectedCategory::create([
-                'anime_id' => $animeProfile->id,
-                'category_id' => $selectedCategory
-            ]);
-        }
+        // /** Create Anime Profile **/
+        // // Upload Thumbnail
+        // $thumbnailUrl = explode('/', parse_url($animeData['thumbnail'], PHP_URL_PATH));
+        // $thumbnailName = array_pop($thumbnailUrl);
+        // $thumbnailNewName = md5(rand(0, 999999999)) . '.' . pathinfo($thumbnailName, PATHINFO_EXTENSION);
+        // Storage::disk('local')->put("thumbnails/{$thumbnailNewName}", file_get_contents($animeData['thumbnail']));
 
-        // Add Anime Episodes
-        foreach ($animeData['episodes'] as $episode) {
-            // Upload Episode Thumbnail
-            $episodeThumbnailUrl = explode('/', parse_url($episode['thumbnail'], PHP_URL_PATH));
-            $episodeThumbnailName = array_pop($episodeThumbnailUrl);
-            $episodeThumbnailNewName = md5(rand(0, 999999999)) . '.' . pathinfo($episodeThumbnailName, PATHINFO_EXTENSION);
-            Storage::disk('local')->put("episodes/thumbnails/{$episodeThumbnailNewName}", file_get_contents($episode['thumbnail']));
+        // // Create Profile
+        // $animeProfile = Anime::create([
+        //     'title' => $animeData['title'],
+        //     'thumbnail' => $thumbnailNewName,
+        //     'description' => $animeData['description'],
+        //     'type' => Type::where('title', '=', "{$animeData['type']}")->first()->id,
+        //     'status' => Status::where('title', '=', "{$animeData['status']}")->first()->id,
+        //     'source' => $animeData['source'],
+        //     'start_from' => $animeData['start_from'],
+        //     'teaser' => $animeData['teaser'],
+        //     'mal_site' => $animeData['mal_site']
+        // ]);
 
-            // Add Episode
-            Episode::create([
-                'anime_id' => $animeProfile->id,
-                'title' => $episode['title'],
-                'servers' => json_encode($episode['servers']),
-                'download' => json_encode($episode['download']),
-                'thumbnail' => $episodeThumbnailNewName,
-            ]);
-        }
+        // // Add Anime Categories
+        // foreach ($animeData['categories'] as $category) {
+        //     $selectedCategory = Category::where('title', '=', trim($category))->first()->id;
+        //     SelectedCategory::create([
+        //         'anime_id' => $animeProfile->id,
+        //         'category_id' => $selectedCategory
+        //     ]);
+        // }
 
-        return $this->successResponse($animeData, 'Anime Scraped Successfully');
+        // // Add Anime Episodes
+        // foreach ($animeData['episodes'] as $episode) {
+        //     // Upload Episode Thumbnail
+        //     $episodeThumbnailUrl = explode('/', parse_url($episode['thumbnail'], PHP_URL_PATH));
+        //     $episodeThumbnailName = array_pop($episodeThumbnailUrl);
+        //     $episodeThumbnailNewName = md5(rand(0, 999999999)) . '.' . pathinfo($episodeThumbnailName, PATHINFO_EXTENSION);
+        //     Storage::disk('local')->put("episodes/thumbnails/{$episodeThumbnailNewName}", file_get_contents($episode['thumbnail']));
+
+        //     // Add Episode
+        //     Episode::create([
+        //         'anime_id' => $animeProfile->id,
+        //         'title' => $episode['title'],
+        //         'servers' => json_encode($episode['servers']),
+        //         'download' => json_encode($episode['download']),
+        //         'thumbnail' => $episodeThumbnailNewName,
+        //     ]);
+        // }
+
+        // return $this->successResponse($animeData, 'Anime Scraped Successfully');
     }
 }
