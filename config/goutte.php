@@ -15,6 +15,7 @@ return [
 
     'client' => [
         'max_redirects' => 0,
-        'proxy' => 'http://scraperapi:d746d3ceb1d8046035973a4d78834eed@proxy-server.scraperapi.com:8001'
+        'proxy' => 'http://scraperapi:d746d3ceb1d8046035973a4d78834eed@proxy-server.scraperapi.com:8001',
+        'verify' => false,
     ],
 ];
