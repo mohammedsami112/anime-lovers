@@ -20,7 +20,7 @@ class scrapersController extends Controller
     {
         foreach ($serversList as $index => $server) {
             if (parse_url($server['embed_url'])['host'] == 'yonaplay.org') {
-                $serverPage = Goutte::request('GET', $server['embed_url'], ['headers' => ['Referer' => 'https://witanime.com/']]);
+                $serverPage = Goutte::request('GET', $server['embed_url'], ['headers' => ['Referer' => 'https://witanime.org/']]);
                 return $serverPage->filter('.OptionsLangDisp .ODDIV li')->each(function ($node) {
                     $title = $node->filter('p')->text() . ' ' . $node->filter('span')->text();
                     $htmlDom = new \DOMDocument;
@@ -151,7 +151,7 @@ class scrapersController extends Controller
     // Anime
     public function anime(Request $request)
     {
-        $website = Goutte::request('GET', $request->link, ['headers' => ['Referer' => 'https://witanime.com/']]);
+        $website = Goutte::request('GET', $request->link, ['proxy' => 'http://scraperapi:d746d3ceb1d8046035973a4d78834eed@proxy-server.scraperapi.com:8001', 'headers' => ['Referer' => 'https://witanime.org/']]);
 
         $title = $website->filter('.anime-details-title')->text();
         $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
