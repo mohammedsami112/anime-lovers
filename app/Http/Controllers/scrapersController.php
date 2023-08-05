@@ -10,6 +10,7 @@ use App\Models\Status;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Goutte;
+use Goutte\Client;
 use Illuminate\Support\Facades\Storage;
 
 class scrapersController extends Controller
@@ -151,7 +152,11 @@ class scrapersController extends Controller
     // Anime
     public function anime(Request $request)
     {
-        $website = Goutte::request('GET', $request->link, ['headers' => ['Referer' => 'https://witanime.org/']]);
+        $client = new Client();
+        $client->withOptions([
+            'base_uri' => 'http://api.scraperapi.com?api_key=d746d3ceb1d8046035973a4d78834eed'
+        ]);
+        $website = $client->request('GET', '/', ['headers' => ['Referer' => 'https://witanime.org/']]);
         $title = $website->filter('.anime-details-title')->text();
         $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
         $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
