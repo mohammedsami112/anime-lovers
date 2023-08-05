@@ -152,7 +152,7 @@ class scrapersController extends Controller
     // Anime
     public function anime(Request $request)
     {
-        $client = new Client();
+        $client = new HttpClient::create();
         $client->withOptions([
             'base_uri' => 'http://api.scraperapi.com?api_key=d746d3ceb1d8046035973a4d78834eed'
         ]);
