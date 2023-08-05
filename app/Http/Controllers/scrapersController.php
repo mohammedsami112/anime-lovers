@@ -157,78 +157,80 @@ class scrapersController extends Controller
             'base_uri' => 'http://api.scraperapi.com?api_key=d746d3ceb1d8046035973a4d78834eed'
         ]);
         $website = $client->request('GET', '/', ['headers' => ['Referer' => 'https://witanime.org/']]);
-        $title = $website->filter('.anime-details-title')->text();
-        $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
-        $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
-            return $node->text();
-        });
-        $description = $website->filter('.anime-story')->text();
-        $info = $website->filter('.anime-info')->each(function ($node) {
-            return $node->innerText() == "" ? $node->filter('a')->text() : $node->innerText();
-        });
-        try {
-            $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href');
-        } catch (\Exception  $e) {
-            $trailer = null;
-        }
 
-        try {
-            $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
-        } catch (\Exception $e) {
-            $mal_site = null;
-        }
+        dd($website);
+        // $title = $website->filter('.anime-details-title')->text();
+        // $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
+        // $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
+        //     return $node->text();
+        // });
+        // $description = $website->filter('.anime-story')->text();
+        // $info = $website->filter('.anime-info')->each(function ($node) {
+        //     return $node->innerText() == "" ? $node->filter('a')->text() : $node->innerText();
+        // });
+        // try {
+        //     $trailer = $website->filter('.anime-external-links .anime-trailer')->attr('href');
+        // } catch (\Exception  $e) {
+        //     $trailer = null;
+        // }
 
-        $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
-            $title = $node->filter('.episodes-card-title h3 a')->text();
-            $thumbnail = $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
-            $episodePage = Goutte::click($node->selectLink($node->filter('a.overlay')->text())->link());
+        // try {
+        //     $mal_site = $website->filter('.anime-external-links .anime-mal')->attr('href');
+        // } catch (\Exception $e) {
+        //     $mal_site = null;
+        // }
 
-            // Episode Page
-            $page = $episodePage->filter('#episode-watch-content')->each(function ($node) {
-                return $node->filter('#episode-servers li > a')->each(function ($node) {
-                    $servers = [
-                        'title' => $node->text(),
-                        'embed_url' => $node->attr('data-ep-url')
-                    ];
-                    return $servers;
-                });
-            });
+        // $episodes = $website->filter('.episodes-list-content .DivEpisodeContainer')->each(function ($node) {
+        //     $title = $node->filter('.episodes-card-title h3 a')->text();
+        //     $thumbnail = $node->filter('.episodes-card-container  img.img-responsive')->attr('src');
+        //     $episodePage = Goutte::click($node->selectLink($node->filter('a.overlay')->text())->link());
 
-            // Episode Download
-            $download = $episodePage->filter('.episode-download-container')->each(function ($node) {
-                return $node->filter('.quality-list li:not(li:first-child) > a')->each(function ($node) {
-                    return [
-                        'title' => $node->text(),
-                        'url' => $node->attr('href')
-                    ];
-                });
-            });
+        //     // Episode Page
+        //     $page = $episodePage->filter('#episode-watch-content')->each(function ($node) {
+        //         return $node->filter('#episode-servers li > a')->each(function ($node) {
+        //             $servers = [
+        //                 'title' => $node->text(),
+        //                 'embed_url' => $node->attr('data-ep-url')
+        //             ];
+        //             return $servers;
+        //         });
+        //     });
 
-
-            return [
-                'title' => $title,
-                'thumbnail' => $thumbnail,
-                'servers' => $this->getAnimeServers($page[0]) == null ? $page[0] : array_merge($page[0], $this->getAnimeServers($page[0])),
-                'download' => $download[0]
-            ];
-        });
+        //     // Episode Download
+        //     $download = $episodePage->filter('.episode-download-container')->each(function ($node) {
+        //         return $node->filter('.quality-list li:not(li:first-child) > a')->each(function ($node) {
+        //             return [
+        //                 'title' => $node->text(),
+        //                 'url' => $node->attr('href')
+        //             ];
+        //         });
+        //     });
 
 
-        $animeData = [
-            'title' =>  $title,
-            'thumbnail' => $thumbnail,
-            'categories' => $categories,
-            'description' => $description,
-            'teaser' => $trailer,
-            'mal_site' => $mal_site,
-            'type' => $info[0],
-            'start_from' => $info[1],
-            'status' => $info[2],
-            'source' => $info[6],
-            'episodes' => $episodes
-        ];
+        //     return [
+        //         'title' => $title,
+        //         'thumbnail' => $thumbnail,
+        //         'servers' => $this->getAnimeServers($page[0]) == null ? $page[0] : array_merge($page[0], $this->getAnimeServers($page[0])),
+        //         'download' => $download[0]
+        //     ];
+        // });
 
-        dd($animeData);
+
+        // $animeData = [
+        //     'title' =>  $title,
+        //     'thumbnail' => $thumbnail,
+        //     'categories' => $categories,
+        //     'description' => $description,
+        //     'teaser' => $trailer,
+        //     'mal_site' => $mal_site,
+        //     'type' => $info[0],
+        //     'start_from' => $info[1],
+        //     'status' => $info[2],
+        //     'source' => $info[6],
+        //     'episodes' => $episodes
+        // ];
+
+        // dd($animeData);
 
 
         // /** Create Anime Profile **/
