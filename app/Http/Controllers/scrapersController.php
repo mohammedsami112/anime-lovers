@@ -224,9 +224,6 @@ class scrapersController extends Controller
             'episodes' => $episodes
         ];
 
-        dd($animeData);
-
-
         /** Create Anime Profile **/
         // Upload Thumbnail
         $thumbnailUrl = explode('/', parse_url($animeData['thumbnail'], PHP_URL_PATH));
