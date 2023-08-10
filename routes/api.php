@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth:sanctum', 'check.admin']], function () {
         Route::get('statuses', 'statuses');
         Route::get('types', 'types');
         Route::get('episode', 'episode');
-        Route::get('anime', 'anime')->withoutMiddleware('auth:sanctum');
+        Route::get('anime', 'anime');
     });
 
     // Users
