@@ -152,7 +152,6 @@ class scrapersController extends Controller
     public function anime(Request $request)
     {
         $website = Goutte::request('GET', $request->query('link'));
-        dd($website);
         $title = $website->filter('.anime-details-title')->text();
         $thumbnail = $website->filter('.anime-thumbnail img')->attr('src');
         $categories = $website->filter('.anime-genres li > a')->each(function ($node) {
