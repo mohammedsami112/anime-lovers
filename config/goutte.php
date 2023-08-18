@@ -16,7 +16,7 @@ return [
     'client' => [
         'max_redirects' => 0,
         // 'base_uri' => 'http://api.scraperapi.com?api_key=d746d3ceb1d8046035973a4d78834eed',
-        // // 'proxy' => 'http://scraperapi.render:d746d3ceb1d8046035973a4d78834eed@proxy-server.scraperapi.com:8001',
+        'proxy' => 'http://scraperapi.render:d746d3ceb1d8046035973a4d78834eed@proxy-server.scraperapi.com:8001',
         // 'verify_host' => false,
         // 'verify_peer' => false,
     ],
